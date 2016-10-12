@@ -46,6 +46,10 @@ apt-get -y upgrade
 apt-get -y dist-upgrade
 apt-get -y autoremove
 
+# General packages
+apt-get install -y git unzip nano wget man-db bzip2
+apt-get install -y mlocate
+updatedb
 
 # Stage 2: Install software
 
