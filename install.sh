@@ -86,14 +86,25 @@ fi
 
 
 
-
-## Stage 3: Server software
+## Stage 3: Webserver software
 
 # Webserver
 apt-get install -y apache2
 a2enmod rewrite
 apt-get install -y php php-cli
 apt-get install -y libapache2-mod-php
+
+# Add user and group who will own the files
+sudo adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
+sudo addgroup rollout || echo "The rollout group already exists"
+
+# Create website area
+mkdir /var/www/travelintimes/
+chown travelintimes.rollout /var/www/travelintimes
+chmod g+ws /var/www/travelintimes
+
+
+## Stage 4: Front-end software
 
 
 
