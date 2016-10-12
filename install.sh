@@ -51,7 +51,14 @@ apt-get install -y git unzip nano wget man-db bzip2
 apt-get install -y mlocate
 updatedb
 
-# Stage 2: Install software
+
+## Stage 2: Install software
+
+# Webserver
+apt-get install -y apache2
+a2enmod rewrite
+apt-get install -y php php-cli
+apt-get install -y libapache2-mod-php
 
 
 
