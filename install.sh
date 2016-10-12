@@ -52,7 +52,42 @@ apt-get install -y mlocate
 updatedb
 
 
-## Stage 2: Install software
+## Stage 2: Conversion software
+
+# ogr2osm, for conversion of shapefiles to .osm
+# See: http://wiki.openstreetmap.org/wiki/Ogr2osm
+# See: https://github.com/pnorman/ogr2osm
+# Usage: python /opt/ogr2osm/ogr2osm.py my-shapefile.shp [-t my-translation-file.py]
+if [ ! -f /opt/ogr2osm/ogr2osm.py ]; then
+	apt-get -y install python-gdal
+	cd /opt/
+	git clone git://github.com/pnorman/ogr2osm.git
+	cd ogr2osm
+	git submodule update --init
+fi
+
+# Omsosis, for pre-processing of .osm files
+# See: http://wiki.openstreetmap.org/wiki/Osmosis/Installation
+# Note: apt-get -y install osmosis can't be used, as that gives too old a version that does not include TagTransform
+if [ ! -f /opt/osmosis/bin/osmosis ]; then
+	cd /opt/
+	wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz
+	mkdir osmosis
+	mv osmosis-latest.tgz osmosis
+	cd osmosis
+	tar xvfz osmosis-latest.tgz
+	rm osmosis-latest.tgz
+	chmod a+x bin/osmosis
+	# bin/osmosis
+fi
+
+# # osmconvert, for merging .osm files
+# apt-get -y install osmctools
+
+
+
+
+## Stage 3: Server software
 
 # Webserver
 apt-get install -y apache2
