@@ -46,10 +46,13 @@ apt-get -y upgrade
 apt-get -y dist-upgrade
 apt-get -y autoremove
 
-# General packages
-apt-get install -y git unzip nano wget man-db bzip2
+# General packages, useful while developing
+apt-get install -y unzip nano man-db bzip2 dnsutils
 apt-get install -y mlocate
 updatedb
+
+# General packages, required for deployment
+apt-get install -y git wget
 
 
 ## Stage 2: Conversion software
