@@ -127,6 +127,16 @@ fi
 chmod -R g+w "$websiteDirectory"
 find "$websiteDirectory" -type d -exec chmod g+s {} \;
 
+# Ensure the configurations directories are writable by the webserver
+chown www-data /opt/travelintimes/configuration/frontend
+chown www-data /opt/travelintimes/configuration/mapnikstylesheet
+chown www-data /opt/travelintimes/configuration/routingprofiles
+chown www-data /opt/travelintimes/configuration/tagtransform
+chown www-data /opt/travelintimes/configuration/frontend/archive
+chown www-data /opt/travelintimes/configuration/mapnikstylesheet/archive
+chown www-data /opt/travelintimes/configuration/routingprofiles/archive
+chown www-data /opt/travelintimes/configuration/tagtransform/archive
+
 # Link in Apache VirtualHost
 if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 	ln -s $SCRIPTDIRECTORY/apache.conf /etc/apache2/sites-enabled/travelintimes.conf
