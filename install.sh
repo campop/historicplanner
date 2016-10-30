@@ -133,8 +133,20 @@ if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 	service apache2 restart
 fi
 
-
-## Stage 4: Front-end software
+# Add OSRM frontend
+osrmFrontendDirectory=/opt/osrm-frontend/
+if [ ! -d "$osrmFrontendDirectory" ]; then
+	mkdir "$osrmFrontendDirectory"
+	chown travelintimes.rollout "$osrmFrontendDirectory"
+	git clone https://github.com/Project-OSRM/osrm-frontend.git "$osrmFrontendDirectory"
+else
+	echo "Updating OSRM frontend repo ..."
+	cd "$osrmFrontendDirectory"
+	git pull
+	echo "... done"
+fi
+chmod -R g+w "$osrmFrontendDirectory"
+find "$osrmFrontendDirectory" -type d -exec chmod g+s {} \;
 
 
 
