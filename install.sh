@@ -96,6 +96,8 @@ apt-get install -y apache2
 a2enmod rewrite
 apt-get install -y php php-cli
 apt-get install -y libapache2-mod-php
+a2enmod macro
+a2enmod headers
 
 # Add user and group who will own the files
 adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
@@ -114,6 +116,12 @@ else
 	cd "$websiteDirectory"
 	git pull
 	echo "... done"
+fi
+
+# Link in Apache VirtualHost
+if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
+	ln -s $SCRIPTDIRECTORY/apache.conf /etc/apache2/sites-enabled/travelintimes.conf
+	service apache2 restart
 fi
 
 
