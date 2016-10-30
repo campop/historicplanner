@@ -108,20 +108,24 @@ fi
 adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
 addgroup rollout || echo "The rollout group already exists"
 
+
+
+## Stage 4: Front-end software
+
 # Create website area
 websiteDirectory=/opt/travelintimes/
 if [ ! -d "$websiteDirectory" ]; then
 	mkdir "$websiteDirectory"
 	chown travelintimes.rollout "$websiteDirectory"
 	git clone https://github.com/campop/travelintimes.git "$websiteDirectory"
-	chmod -R g+w "$websiteDirectory"
-	find "$websiteDirectory" -type d -exec chmod g+s {} \;
 else
 	echo "Updating travelintimes repo ..."
 	cd "$websiteDirectory"
 	git pull
 	echo "... done"
 fi
+chmod -R g+w "$websiteDirectory"
+find "$websiteDirectory" -type d -exec chmod g+s {} \;
 
 # Link in Apache VirtualHost
 if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
