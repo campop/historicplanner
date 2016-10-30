@@ -99,6 +99,11 @@ apt-get install -y libapache2-mod-php
 a2enmod macro
 a2enmod headers
 
+# Disable Apache logrotate, as this loses log entries for stats purposes
+if [ -f /etc/logrotate.d/apache2 ]; then
+	mv /etc/logrotate.d/apache2 /etc/logrotate.d-apache2.disabled
+fi
+
 # Add user and group who will own the files
 adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
 addgroup rollout || echo "The rollout group already exists"
