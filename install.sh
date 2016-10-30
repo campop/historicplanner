@@ -57,6 +57,11 @@ apt-get install -y git wget
 
 ## Stage 2: Conversion software
 
+# GDAL/ogr2ogr
+add-apt-repository -y ppa:ubuntugis/ppa
+apt-get update
+apt-get install gdal-bin
+
 # ogr2osm, for conversion of shapefiles to .osm
 # See: http://wiki.openstreetmap.org/wiki/Ogr2osm
 # See: https://github.com/pnorman/ogr2osm
