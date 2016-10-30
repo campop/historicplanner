@@ -137,6 +137,13 @@ chown www-data "${websiteDirectory}configuration/mapnikstylesheet/archive"
 chown www-data "${websiteDirectory}configuration/routingprofiles/archive"
 chown www-data "${websiteDirectory}configuration/tagtransform/archive"
 
+# Ensure the configuration files are writable by the webserver
+chown www-data "${websiteDirectory}configuration/tagtransform/tagtransform.xml"
+chown www-data "${websiteDirectory}configuration/mapnikstylesheet/mapnikstylesheet.xml"
+chown www-data "${websiteDirectory}configuration/frontend/osrm-frontend.js"
+chown www-data "${websiteDirectory}configuration/routingprofiles/profile-*"
+
+
 # Link in Apache VirtualHost
 if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 	ln -s $SCRIPTDIRECTORY/apache.conf /etc/apache2/sites-enabled/travelintimes.conf
