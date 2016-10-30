@@ -77,6 +77,7 @@ fi
 # Omsosis, for pre-processing of .osm files
 # See: http://wiki.openstreetmap.org/wiki/Osmosis/Installation
 # Note: apt-get -y install osmosis can't be used, as that gives too old a version that does not include TagTransform
+apt-get install default-jdk
 if [ ! -f /opt/osmosis/bin/osmosis ]; then
 	cd /opt/
 	wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz
