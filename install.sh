@@ -94,7 +94,7 @@ fi
 # Webserver
 apt-get install -y apache2
 a2enmod rewrite
-apt-get install -y php php-cli
+apt-get install -y php php-cli php-xml
 apt-get install -y libapache2-mod-php
 a2enmod macro
 a2enmod headers
