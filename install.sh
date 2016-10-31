@@ -119,38 +119,38 @@ addgroup rollout || echo "The rollout group already exists"
 ## Stage 4: Front-end software
 
 # Create website area
-websiteDirectory=/opt/travelintimes/
-if [ ! -d "$websiteDirectory" ]; then
-	mkdir "$websiteDirectory"
-	chown travelintimes.rollout "$websiteDirectory"
-	git clone https://github.com/campop/travelintimes.git "$websiteDirectory"
+websiteDirectory=/opt/travelintimes
+if [ ! -d "$websiteDirectory/" ]; then
+	mkdir "$websiteDirectory/"
+	chown travelintimes.rollout "$websiteDirectory/"
+	git clone https://github.com/campop/travelintimes.git "$websiteDirectory/"
 else
 	echo "Updating travelintimes repo ..."
-	cd "$websiteDirectory"
+	cd "$websiteDirectory/"
 	git pull
 	echo "... done"
 fi
-chmod -R g+w "$websiteDirectory"
-find "$websiteDirectory" -type d -exec chmod g+s {} \;
+chmod -R g+w "$websiteDirectory/"
+find "$websiteDirectory/" -type d -exec chmod g+s {} \;
 
 # Ensure the configurations directories are writable by the webserver
-chown www-data "${websiteDirectory}configuration/frontend"
-chown www-data "${websiteDirectory}configuration/mapnikstylesheet"
-chown www-data "${websiteDirectory}configuration/routingprofiles"
-chown www-data "${websiteDirectory}configuration/tagtransform"
-chown www-data "${websiteDirectory}configuration/frontend/archive"
-chown www-data "${websiteDirectory}configuration/mapnikstylesheet/archive"
-chown www-data "${websiteDirectory}configuration/routingprofiles/archive"
-chown www-data "${websiteDirectory}configuration/tagtransform/archive"
+chown www-data "${websiteDirectory}/configuration/frontend"
+chown www-data "${websiteDirectory}/configuration/mapnikstylesheet"
+chown www-data "${websiteDirectory}/configuration/routingprofiles"
+chown www-data "${websiteDirectory}/configuration/tagtransform"
+chown www-data "${websiteDirectory}/configuration/frontend/archive"
+chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/archive"
+chown www-data "${websiteDirectory}/configuration/routingprofiles/archive"
+chown www-data "${websiteDirectory}/configuration/tagtransform/archive"
 
 # Ensure the configuration files are writable by the webserver
-chown www-data "${websiteDirectory}configuration/tagtransform/tagtransform.xml"
-chown www-data "${websiteDirectory}configuration/mapnikstylesheet/mapnikstylesheet.xml"
-chown www-data "${websiteDirectory}configuration/frontend/osrm-frontend.js"
-chown www-data "${websiteDirectory}configuration/routingprofiles/profile-*"
+chown www-data "${websiteDirectory}/configuration/tagtransform/tagtransform.xml"
+chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/mapnikstylesheet.xml"
+chown www-data "${websiteDirectory}/configuration/frontend/osrm-frontend.js"
+chown www-data "${websiteDirectory}/configuration/routingprofiles/profile-*"
 
 # Ensure the build directory is writable by the webserver
-chown www-data "${websiteDirectory}build-tmp/"
+chown www-data "${websiteDirectory}/build-tmp/"
 
 # Link in Apache VirtualHost
 if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
@@ -159,21 +159,21 @@ if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 fi
 
 # Add OSRM frontend
-osrmFrontendDirectory=/opt/osrm-frontend/
-if [ ! -d "$osrmFrontendDirectory" ]; then
-	mkdir "$osrmFrontendDirectory"
-	chown travelintimes.rollout "$osrmFrontendDirectory"
-	git clone https://github.com/Project-OSRM/osrm-frontend.git "$osrmFrontendDirectory"
+osrmFrontendDirectory=/opt/osrm-frontend
+if [ ! -d "$osrmFrontendDirectory/" ]; then
+	mkdir "$osrmFrontendDirectory/"
+	chown travelintimes.rollout "$osrmFrontendDirectory/"
+	git clone https://github.com/Project-OSRM/osrm-frontend.git "$osrmFrontendDirectory/"
 else
 	echo "Updating OSRM frontend repo ..."
-	cd "$osrmFrontendDirectory"
+	cd "$osrmFrontendDirectory/"
 	git pull
 	echo "... done"
 fi
-chmod -R g+w "$osrmFrontendDirectory"
-find "$osrmFrontendDirectory" -type d -exec chmod g+s {} \;
-mv "${osrmFrontendDirectory}src/leaflet_options.js" "${osrmFrontendDirectory}src/leaflet_options.js.original"
-ln -s "${osrmFrontendDirectory}configuration/frontend/osrm-frontend.js" "${osrmFrontendDirectory}src/"
+chmod -R g+w "$osrmFrontendDirectory/"
+find "$osrmFrontendDirectory/" -type d -exec chmod g+s {} \;
+mv "${osrmFrontendDirectory}/src/leaflet_options.js" "${osrmFrontendDirectory}/src/leaflet_options.js.original"
+ln -s "${osrmFrontendDirectory}/configuration/frontend/osrm-frontend.js" "${osrmFrontendDirectory}/src/"
 
 
 
@@ -183,26 +183,26 @@ ln -s "${osrmFrontendDirectory}configuration/frontend/osrm-frontend.js" "${osrmF
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-OSRM
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-on-Ubuntu
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM
-osrmBackendDirectory=/opt/osrm-backend/
-if [ ! -f "${osrmBackendDirectory}build/osrm-extract" ]; then
+osrmBackendDirectory=/opt/osrm-backend
+if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 #	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl-doc libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.1 liblua5.1-0-dev libluabind-dev libtbb-dev
 	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libluabind-dev libtbb-dev
 	apt-get -y install doxygen
 	cd /opt/
-	mkdir "$osrmBackendDirectory"
-	chown -R travelintimes.rollout "$osrmBackendDirectory"
+	mkdir "$osrmBackendDirectory/"
+	chown -R travelintimes.rollout "$osrmBackendDirectory/"
 	wget -P /tmp/ https://github.com/Project-OSRM/osrm-backend/archive/v5.4.0.tar.gz
-	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v5.4.0.tar.gz -C $osrmBackendDirectory --strip-components=1"
-	cd "$osrmBackendDirectory"
+	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v5.4.0.tar.gz -C ${osrmBackendDirectory}/ --strip-components=1"
+	cd "$osrmBackendDirectory/"
 	mkdir -p build
-	chown -R travelintimes.rollout "${osrmBackendDirectory}build/"
+	chown -R travelintimes.rollout "${osrmBackendDirectory}/build/"
 	cd build
 	sudo -H -u travelintimes bash -c "cmake .. -DCMAKE_BUILD_TYPE=Release"
 	sudo -H -u travelintimes bash -c "cmake --build ."
 	cmake --build . --target install
 fi
-chmod -R g+w "$osrmBackendDirectory"
-find "$osrmBackendDirectory" -type d -exec chmod g+s {} \;
+chmod -R g+w "$osrmBackendDirectory/"
+find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
 
 
