@@ -178,6 +178,7 @@ if [ ! -L "${osrmFrontendDirectory}/src/leaflet_options.js" ]; then
 	mv "${osrmFrontendDirectory}/src/leaflet_options.js" "${osrmFrontendDirectory}/src/leaflet_options.js.original"
 	ln -s "${websiteDirectory}/configuration/frontend/osrm-frontend.js" "${osrmFrontendDirectory}/src/leaflet_options.js"
 fi
+chown -R www-data "${osrmFrontendDirectory}/bundle."* "${osrmFrontendDirectory}/css"
 apt-get install -y npm
 # Use of nodejs-legacy needed to avoid: 'npm WARN This failure might be due to the use of legacy binary "node"'; see: http://stackoverflow.com/a/21171188
 apt-get install -y nodejs-legacy
