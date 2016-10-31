@@ -194,6 +194,7 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	chown -R travelintimes.rollout "$osrmBackendDirectory/"
 	wget -P /tmp/ "https://github.com/Project-OSRM/osrm-backend/archive/v${osrmVersion}.tar.gz"
 	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${osrmVersion}.tar.gz -C ${osrmBackendDirectory}/ --strip-components=1"
+	rm "/tmp/v${osrmVersion}.tar.gz"
 	cd "$osrmBackendDirectory/"
 	mkdir -p build
 	chown -R travelintimes.rollout "${osrmBackendDirectory}/build/"
