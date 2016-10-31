@@ -162,7 +162,6 @@ fi
 osrmFrontendDirectory=/opt/osrm-frontend
 if [ ! -d "$osrmFrontendDirectory/" ]; then
 	mkdir "$osrmFrontendDirectory/"
-	chown travelintimes.rollout "$osrmFrontendDirectory/"
 	git clone https://github.com/Project-OSRM/osrm-frontend.git "$osrmFrontendDirectory/"
 else
 	echo "Updating OSRM frontend repo ..."
@@ -170,11 +169,21 @@ else
 	git pull
 	echo "... done"
 fi
+chown -R travelintimes.rollout "$osrmFrontendDirectory/"
 chmod -R g+w "$osrmFrontendDirectory/"
 find "$osrmFrontendDirectory/" -type d -exec chmod g+s {} \;
-mv "${osrmFrontendDirectory}/src/leaflet_options.js" "${osrmFrontendDirectory}/src/leaflet_options.js.original"
-ln -s "${osrmFrontendDirectory}/configuration/frontend/osrm-frontend.js" "${osrmFrontendDirectory}/src/"
 
+# Link in configuration and enable building of OSRM frontend
+if [ ! -L "${osrmFrontendDirectory}/src/leaflet_options.js" ]; then
+	mv "${osrmFrontendDirectory}/src/leaflet_options.js" "${osrmFrontendDirectory}/src/leaflet_options.js.original"
+	ln -s "${websiteDirectory}/configuration/frontend/osrm-frontend.js" "${osrmFrontendDirectory}/src/leaflet_options.js"
+fi
+apt-get install -y npm
+# Use of nodejs-legacy needed to avoid: 'npm WARN This failure might be due to the use of legacy binary "node"'; see: http://stackoverflow.com/a/21171188
+apt-get install -y nodejs-legacy
+cd "$osrmFrontendDirectory/"
+npm install
+sudo -H -u travelintimes bash -c "make"
 
 
 ## Stage 5: Routing engine
