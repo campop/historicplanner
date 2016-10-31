@@ -147,7 +147,7 @@ chown www-data "${websiteDirectory}/configuration/tagtransform/archive"
 chown www-data "${websiteDirectory}/configuration/tagtransform/tagtransform.xml"
 chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/mapnikstylesheet.xml"
 chown www-data "${websiteDirectory}/configuration/frontend/osrm-frontend.js"
-chown www-data "${websiteDirectory}/configuration/routingprofiles/profile-*"
+chown www-data "${websiteDirectory}/configuration/routingprofiles/profile-"*
 
 # Ensure the build directory is writable by the webserver
 chown www-data "${websiteDirectory}/build-tmp/"
