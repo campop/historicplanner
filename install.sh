@@ -184,6 +184,7 @@ ln -s "${osrmFrontendDirectory}/configuration/frontend/osrm-frontend.js" "${osrm
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-on-Ubuntu
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM
 osrmBackendDirectory=/opt/osrm-backend
+osrmVersion=5.4.0
 if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 #	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl-doc libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.1 liblua5.1-0-dev libluabind-dev libtbb-dev
 	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libluabind-dev libtbb-dev
@@ -191,8 +192,8 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	cd /opt/
 	mkdir "$osrmBackendDirectory/"
 	chown -R travelintimes.rollout "$osrmBackendDirectory/"
-	wget -P /tmp/ https://github.com/Project-OSRM/osrm-backend/archive/v5.4.0.tar.gz
-	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v5.4.0.tar.gz -C ${osrmBackendDirectory}/ --strip-components=1"
+	wget -P /tmp/ "https://github.com/Project-OSRM/osrm-backend/archive/v${osrmVersion}.tar.gz"
+	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${osrmVersion}.tar.gz -C ${osrmBackendDirectory}/ --strip-components=1"
 	cd "$osrmBackendDirectory/"
 	mkdir -p build
 	chown -R travelintimes.rollout "${osrmBackendDirectory}/build/"
