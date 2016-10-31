@@ -60,7 +60,7 @@ apt-get install -y git wget
 # GDAL/ogr2ogr
 add-apt-repository -y ppa:ubuntugis/ppa
 apt-get update
-apt-get install gdal-bin
+apt-get install -y gdal-bin
 
 # ogr2osm, for conversion of shapefiles to .osm
 # See: http://wiki.openstreetmap.org/wiki/Ogr2osm
@@ -77,7 +77,7 @@ fi
 # Omsosis, for pre-processing of .osm files
 # See: http://wiki.openstreetmap.org/wiki/Osmosis/Installation
 # Note: apt-get -y install osmosis can't be used, as that gives too old a version that does not include TagTransform
-apt-get install default-jdk
+apt-get install -y default-jdk
 if [ ! -f /opt/osmosis/bin/osmosis ]; then
 	cd /opt/
 	wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz
