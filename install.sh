@@ -172,6 +172,8 @@ else
 fi
 chmod -R g+w "$osrmFrontendDirectory"
 find "$osrmFrontendDirectory" -type d -exec chmod g+s {} \;
+mv "${osrmFrontendDirectory}src/leaflet_options.js" "${osrmFrontendDirectory}src/leaflet_options.js.original"
+ln -s "${osrmFrontendDirectory}configuration/frontend/osrm-frontend.js" "${osrmFrontendDirectory}src/"
 
 
 
