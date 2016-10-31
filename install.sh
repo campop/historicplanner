@@ -216,6 +216,10 @@ fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
+# Permit engine(s) from port 5000
+iptables -I INPUT 1 -p tcp --match multiport --dports 5000:5019 -j ACCEPT
+netfilter-persistent save
+netstat -ntlup
 
 
 
