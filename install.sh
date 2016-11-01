@@ -221,6 +221,13 @@ iptables -I INPUT 1 -p tcp --match multiport --dports 5000:5019 -j ACCEPT
 netfilter-persistent save
 netstat -ntlup
 
+# Create a symlink to the profile will be, and enable it to be writeable by the webserver
+touch "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
+chown -R www-data.rollout "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
+chmod g+w "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
+if [ ! -L  "${osrmBackendDirectory}/build/profile.lua" ]; then
+	ln -s "${osrmBackendDirectory}/profiles/latest-build-profile.lua" "${osrmBackendDirectory}/build/profile.lua"
+fi
 
 
 # Report completion
