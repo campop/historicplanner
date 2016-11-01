@@ -230,8 +230,8 @@ if [ ! -L  "${osrmBackendDirectory}/build/profile.lua" ]; then
 fi
 
 # Enable Apache to log to a build file
-touch "{$websiteDirectory}/build.log"
-chown www-data "{$websiteDirectory}/build.log"
+touch "${websiteDirectory}/build.log"
+chown www-data "${websiteDirectory}/build.log"
 
 # Enable Apache-commenced OSRM process to log to a folder
 chown www-data "${websiteDirectory}/logs-osrm/"
