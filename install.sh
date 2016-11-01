@@ -184,7 +184,7 @@ apt-get install -y npm
 apt-get install -y nodejs-legacy
 cd "$osrmFrontendDirectory/"
 npm install
-sudo -H -u travelintimes bash -c "make"
+sudo -H -u www-data bash -c "make"
 
 
 ## Stage 5: Routing engine
