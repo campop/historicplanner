@@ -233,6 +233,8 @@ fi
 touch "{$websiteDirectory}/build.log"
 chown www-data "{$websiteDirectory}/build.log"
 
+# Enable Apache-commenced OSRM process to log to a folder
+chown www-data "${websiteDirectory}/logs-osrm/"
 
 
 # Report completion
