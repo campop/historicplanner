@@ -237,6 +237,12 @@ chown www-data "{$websiteDirectory}/build.log"
 chown www-data "${websiteDirectory}/logs-osrm/"
 
 
+## Stage 6: Tile rendering
+
+# Install mapnik; see: http://wiki.openstreetmap.org/wiki/User:SomeoneElse/Ubuntu_1604_tileserver_load#Mapnik
+apt-get install -y autoconf apache2-dev libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal1-dev libmapnik-dev mapnik-utils python-mapnik
+
+
 # Report completion
 echo "#	Installation completed"
 
