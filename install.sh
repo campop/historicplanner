@@ -258,6 +258,10 @@ chown www-data "${websiteDirectory}/logs-osrm/"
 apt-get install -y autoconf apache2-dev libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal1-dev libmapnik-dev mapnik-utils python-mapnik
 
 
+
+# Update file search index
+updatedb
+
 # Report completion
 echo "#	Installation completed"
 
