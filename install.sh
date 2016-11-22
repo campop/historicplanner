@@ -159,7 +159,7 @@ if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 fi
 
 # Add leaflet-routing-machine
-lrmFrontendDirectory=/opt/osrm-frontend
+lrmFrontendDirectory=/opt/leaflet-routing-machine
 if [ ! -d "$lrmFrontendDirectory/" ]; then
 	mkdir "$lrmFrontendDirectory/"
 	git clone https://github.com/perliedman/leaflet-routing-machine.git "$lrmFrontendDirectory/"
