@@ -135,6 +135,7 @@ find "$websiteDirectory/" -type d -exec chmod g+s {} \;
 cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirectory/htdocs/controlpanel/index.html"
 
 # Ensure the configurations directories are writable by the webserver
+chown www-data "${websiteDirectory}/configuration"
 chown www-data "${websiteDirectory}/configuration/frontend"
 chown www-data "${websiteDirectory}/configuration/mapnikstylesheet"
 chown www-data "${websiteDirectory}/configuration/routingprofiles"
