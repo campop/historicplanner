@@ -22,11 +22,11 @@ sudo apt-get -y install git
 # git config --global push.default simple
 
 # Clone the repo
-git clone https://github.com/campop/travelintimes.git
+git clone https://github.com/campop/travelintimes-deploy.git
 
 # Move it to the right place
-sudo mv travelintimes /opt
-cd /opt/travelintimes/
+sudo mv travelintimes-deploy /opt
+cd /opt/travelintimes-deploy/
 git config core.sharedRepository group
 
 # Create a user - without prompting for e.g. office 'phone number
@@ -47,9 +47,9 @@ ssh user@machine
 
 # Set ownership and group
 # user@machine:~$
-sudo chown -R travelintimes.rollout /opt/travelintimes
+sudo chown -R travelintimes.rollout /opt/travelintimes-deploy
 
 # Set group permissions and add sticky group bit
-sudo chmod -R g+w /opt/travelintimes
+sudo chmod -R g+w /opt/travelintimes-deploy
 sudo find /opt/travelintimes -type d -exec chmod g+s {} \;
 ```
