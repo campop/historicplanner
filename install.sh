@@ -151,6 +151,9 @@ chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/mapnikstylesh
 chown www-data "${websiteDirectory}/configuration/frontend/osrm-frontend.js"
 chown www-data "${websiteDirectory}/configuration/routingprofiles/profile-"*
 
+# Ensure the upload export files are writable by the webserver
+chown www-data "${websiteDirectory}/exports"
+
 # Ensure the build directory is writable by the webserver
 chown www-data "${websiteDirectory}/enginedata/"
 
