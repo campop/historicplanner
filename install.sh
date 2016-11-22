@@ -158,7 +158,22 @@ if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 	service apache2 restart
 fi
 
-# Add OSRM frontend
+# Add leaflet-routing-machine
+lrmFrontendDirectory=/opt/osrm-frontend
+if [ ! -d "$lrmFrontendDirectory/" ]; then
+	mkdir "$lrmFrontendDirectory/"
+	git clone https://github.com/perliedman/leaflet-routing-machine.git "$lrmFrontendDirectory/"
+else
+	echo "Updating Leaflet Routing Machine frontend repo ..."
+	cd "$lrmFrontendDirectory/"
+	git pull
+	echo "... done"
+fi
+chown -R travelintimes.rollout "$lrmFrontendDirectory/"
+chmod -R g+w "$lrmFrontendDirectory/"
+find "$lrmFrontendDirectory/" -type d -exec chmod g+s {} \;
+
+# Add OSRM frontend (alternative GUI)
 osrmFrontendDirectory=/opt/osrm-frontend
 if [ ! -d "$osrmFrontendDirectory/" ]; then
 	mkdir "$osrmFrontendDirectory/"
