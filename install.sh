@@ -165,18 +165,14 @@ fi
 
 # Add leaflet-routing-machine
 lrmFrontendDirectory=/opt/leaflet-routing-machine
+lrmVersion=3.2.4
 if [ ! -d "$lrmFrontendDirectory/" ]; then
-	mkdir "$lrmFrontendDirectory/"
-	git clone https://github.com/perliedman/leaflet-routing-machine.git "$lrmFrontendDirectory/"
-else
-	echo "Updating Leaflet Routing Machine frontend repo ..."
-	cd "$lrmFrontendDirectory/"
-	git pull
-	echo "... done"
+	cd /opt/
+	mkdir "$lrmFrontendDirectory"
+	chown -R travelintimes.rollout "$lrmFrontendDirectory"
+	wget -P /tmp/ "https://github.com/perliedman/leaflet-routing-machine/archive/v${lrmVersion}.tar.gz"
+	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${lrmVersion}.tar.gz -C ${lrmFrontendDirectory}/ --strip-components=1"
 fi
-chown -R travelintimes.rollout "$lrmFrontendDirectory/"
-chmod -R g+w "$lrmFrontendDirectory/"
-find "$lrmFrontendDirectory/" -type d -exec chmod g+s {} \;
 
 # Add OSRM frontend (alternative GUI)
 osrmFrontendDirectory=/opt/osrm-frontend
@@ -199,6 +195,7 @@ if [ ! -L "${osrmFrontendDirectory}/src/leaflet_options.js" ]; then
 	ln -s "${websiteDirectory}/configuration/frontend/osrm-frontend.js" "${osrmFrontendDirectory}/src/leaflet_options.js"
 fi
 chown -R www-data "${osrmFrontendDirectory}/bundle."* "${osrmFrontendDirectory}/css"
+# Install npm for building frontend
 apt-get install -y npm
 # Use of nodejs-legacy needed to avoid: 'npm WARN This failure might be due to the use of legacy binary "node"'; see: http://stackoverflow.com/a/21171188
 apt-get install -y nodejs-legacy
