@@ -173,6 +173,8 @@ if [ ! -d "$lrmFrontendDirectory/" ]; then
 	wget -P /tmp/ "https://github.com/perliedman/leaflet-routing-machine/archive/v${lrmVersion}.tar.gz"
 	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${lrmVersion}.tar.gz -C ${lrmFrontendDirectory}/ --strip-components=1"
 fi
+chown travelintimes.rollout "${websiteDirectory}/htdocs/index."*
+chmod g+w "${websiteDirectory}/htdocs/index."*
 
 # Add OSRM frontend (alternative GUI)
 osrmFrontendDirectory=/opt/osrm-frontend
