@@ -185,7 +185,7 @@ else
 	git pull
 	echo "... done"
 fi
-chown -R travelintimes.rollout "$osrmFrontendDirectory/"
+chown -R travelintimes.rollout "$osrmFrontendDirectory"
 chmod -R g+w "$osrmFrontendDirectory/"
 find "$osrmFrontendDirectory/" -type d -exec chmod g+s {} \;
 
@@ -217,8 +217,8 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libluabind-dev libtbb-dev
 	apt-get -y install doxygen
 	cd /opt/
-	mkdir "$osrmBackendDirectory/"
-	chown -R travelintimes.rollout "$osrmBackendDirectory/"
+	mkdir "$osrmBackendDirectory"
+	chown -R travelintimes.rollout "$osrmBackendDirectory"
 	wget -P /tmp/ "https://github.com/Project-OSRM/osrm-backend/archive/v${osrmVersion}.tar.gz"
 	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${osrmVersion}.tar.gz -C ${osrmBackendDirectory}/ --strip-components=1"
 	rm "/tmp/v${osrmVersion}.tar.gz"
