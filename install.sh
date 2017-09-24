@@ -259,6 +259,12 @@ chown www-data "${websiteDirectory}/build.log"
 chown www-data "${websiteDirectory}/logs-osrm/"
 
 
+
+# Enable proxing
+a2enmod proxy proxy_http
+service apache2 restart
+
+
 ## Stage 6: Tile rendering
 
 # Install mapnik; see: http://wiki.openstreetmap.org/wiki/User:SomeoneElse/Ubuntu_1604_tileserver_load#Mapnik
