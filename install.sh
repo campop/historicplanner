@@ -259,13 +259,31 @@ chown www-data "${websiteDirectory}/build.log"
 chown www-data "${websiteDirectory}/logs-osrm/"
 
 
+## Stage 6: HTTPS support
 
-# Enable proxing
+# Install certbot (Let's Encrypt); see: https://certbot.eff.org/all-instructions/#ubuntu-14-04-trusty-apache
+apt-get update
+apt-get install -y software-properties-common
+add-apt-repository ppa:certbot/certbot
+apt-get update
+apt-get install -y python-certbot-apache
+
+# Issue certificate
+if [ ! -f /etc/letsencrypt/live/www.travelintimes.org/fullchain.pem ]; then
+	email="campop@"
+	email+="geog.cam.ac.uk"
+	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w /opt/travelintimes/htdocs/ --email $email -d www.travelintimes.org -d  travelintimes.org
+fi
+
+# Enable SSL in Apache
+a2enmod ssl
+
+# Enable proxing, as osrm-routed can only serve HTTP, not HTTPS
 a2enmod proxy proxy_http
 service apache2 restart
 
 
-## Stage 6: Tile rendering
+## Stage 7: Tile rendering
 
 # Install mapnik; see: http://wiki.openstreetmap.org/wiki/User:SomeoneElse/Ubuntu_1604_tileserver_load#Mapnik
 apt-get install -y autoconf apache2-dev libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal1-dev libmapnik-dev mapnik-utils python-mapnik
