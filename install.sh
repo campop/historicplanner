@@ -93,6 +93,14 @@ fi
 # # osmconvert, for merging .osm files
 # apt-get -y install osmctools
 
+# Conversion to GeoJSON
+apt-get install -y npm nodejs-legacy
+npm install -g osmtogeojson
+npm install -g ndjson-cli
+npm install -g geojson-mend
+npm install -g geojson-precision
+apt-get install -y jq
+
 
 
 ## Stage 3: Webserver software
