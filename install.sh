@@ -58,7 +58,7 @@ apt-get install -y git wget
 ## Stage 2: Conversion software
 
 # Define path containing all local software
-softwareRoot=/opt
+softwareRoot=/var/www/travelintimes
 
 # GDAL/ogr2ogr
 add-apt-repository -y ppa:ubuntugis/ppa
