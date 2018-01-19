@@ -25,8 +25,9 @@ sudo apt-get -y install git
 git clone https://github.com/campop/travelintimes-deploy.git
 
 # Move it to the right place
-sudo mv travelintimes-deploy /opt
-cd /opt/travelintimes-deploy/
+softwareRoot=/opt
+sudo mv travelintimes-deploy $softwareRoot/
+cd $softwareRoot/travelintimes-deploy/
 git config core.sharedRepository group
 
 # Create a user - without prompting for e.g. office 'phone number
@@ -47,9 +48,9 @@ ssh user@machine
 
 # Set ownership and group
 # user@machine:~$
-sudo chown -R travelintimes.rollout /opt/travelintimes-deploy
+sudo chown -R travelintimes.rollout $softwareRoot/travelintimes-deploy
 
 # Set group permissions and add sticky group bit
-sudo chmod -R g+w /opt/travelintimes-deploy
-sudo find /opt/travelintimes -type d -exec chmod g+s {} \;
+sudo chmod -R g+w $softwareRoot/travelintimes-deploy
+sudo find $softwareRoot/travelintimes -type d -exec chmod g+s {} \;
 ```

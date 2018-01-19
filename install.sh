@@ -57,6 +57,9 @@ apt-get install -y git wget
 
 ## Stage 2: Conversion software
 
+# Define path containing all local software
+softwareRoot=/opt
+
 # GDAL/ogr2ogr
 add-apt-repository -y ppa:ubuntugis/ppa
 apt-get update
@@ -65,10 +68,10 @@ apt-get install -y gdal-bin
 # ogr2osm, for conversion of shapefiles to .osm
 # See: http://wiki.openstreetmap.org/wiki/Ogr2osm
 # See: https://github.com/pnorman/ogr2osm
-# Usage: python /opt/ogr2osm/ogr2osm.py my-shapefile.shp [-t my-translation-file.py]
-if [ ! -f /opt/ogr2osm/ogr2osm.py ]; then
+# Usage: python $softwareRoot/ogr2osm/ogr2osm.py my-shapefile.shp [-t my-translation-file.py]
+if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
 	apt-get -y install python-gdal
-	cd /opt/
+	cd $softwareRoot/
 	git clone git://github.com/pnorman/ogr2osm.git
 	cd ogr2osm
 	git submodule update --init
@@ -78,8 +81,8 @@ fi
 # See: http://wiki.openstreetmap.org/wiki/Osmosis/Installation
 # Note: apt-get -y install osmosis can't be used, as that gives too old a version that does not include TagTransform
 apt-get install -y default-jdk
-if [ ! -f /opt/osmosis/bin/osmosis ]; then
-	cd /opt/
+if [ ! -f $softwareRoot/osmosis/bin/osmosis ]; then
+	cd $softwareRoot/
 	wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz
 	mkdir osmosis
 	mv osmosis-latest.tgz osmosis
@@ -127,7 +130,7 @@ addgroup rollout || echo "The rollout group already exists"
 ## Stage 4: Front-end software
 
 # Create website area
-websiteDirectory=/opt/travelintimes
+websiteDirectory=$softwareRoot/travelintimes
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
 	chown travelintimes.rollout "$websiteDirectory/"
@@ -171,14 +174,15 @@ chown www-data "${websiteDirectory}/enginedata/"
 # Link in Apache VirtualHost
 if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 	ln -s $SCRIPTDIRECTORY/apache.conf /etc/apache2/sites-enabled/travelintimes.conf
+	sed -i "s/\/var\/www\/travelintimes/$softwareRoot/g' /etc/apache2/sites-enabled/travelintimes.conf
 	service apache2 restart
 fi
 
 # Add leaflet-routing-machine
-lrmFrontendDirectory=/opt/leaflet-routing-machine
+lrmFrontendDirectory=$softwareRoot/leaflet-routing-machine
 lrmVersion=3.2.4
 if [ ! -d "$lrmFrontendDirectory/" ]; then
-	cd /opt/
+	cd $softwareRoot/
 	mkdir "$lrmFrontendDirectory"
 	chown -R travelintimes.rollout "$lrmFrontendDirectory"
 	wget -P /tmp/ "https://github.com/perliedman/leaflet-routing-machine/archive/v${lrmVersion}.tar.gz"
@@ -188,7 +192,7 @@ chown travelintimes.rollout "${websiteDirectory}/htdocs/index."*
 chmod g+w "${websiteDirectory}/htdocs/index."*
 
 # Add OSRM frontend (alternative GUI)
-osrmFrontendDirectory=/opt/osrm-frontend
+osrmFrontendDirectory=$softwareRoot/osrm-frontend
 if [ ! -d "$osrmFrontendDirectory/" ]; then
 	mkdir "$osrmFrontendDirectory/"
 	git clone https://github.com/Project-OSRM/osrm-frontend.git "$osrmFrontendDirectory/"
@@ -223,13 +227,13 @@ sudo -H -u www-data bash -c "make"
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-OSRM
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-on-Ubuntu
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM
-osrmBackendDirectory=/opt/osrm-backend
+osrmBackendDirectory=$softwareRoot/osrm-backend
 osrmVersion=5.4.0
 if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 #	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl-doc libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.1 liblua5.1-0-dev libluabind-dev libtbb-dev
 	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libluabind-dev libtbb-dev
 	apt-get -y install doxygen
-	cd /opt/
+	cd $softwareRoot/
 	mkdir "$osrmBackendDirectory"
 	chown -R travelintimes.rollout "$osrmBackendDirectory"
 	wget -P /tmp/ "https://github.com/Project-OSRM/osrm-backend/archive/v${osrmVersion}.tar.gz"
@@ -280,7 +284,7 @@ apt-get install -y python-certbot-apache
 if [ ! -f /etc/letsencrypt/live/www.travelintimes.org/fullchain.pem ]; then
 	email="campop@"
 	email+="geog.cam.ac.uk"
-	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w /opt/travelintimes/htdocs/ --email $email -d www.travelintimes.org -d  travelintimes.org
+	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w $softwareRoot/travelintimes/htdocs/ --email $email -d www.travelintimes.org -d  travelintimes.org
 fi
 
 # Enable SSL in Apache
