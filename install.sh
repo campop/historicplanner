@@ -131,7 +131,6 @@ fi
 websiteDirectory=$softwareRoot/travelintimes
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
-	chown travelintimes.travelintimes "$websiteDirectory/"
 	git clone https://github.com/campop/travelintimes.git "$websiteDirectory/"
 else
 	echo "Updating travelintimes repo ..."
@@ -139,6 +138,7 @@ else
 	git pull
 	echo "... done"
 fi
+chown -R travelintimes.travelintimes "$websiteDirectory/"
 chmod -R g+w "$websiteDirectory/"
 find "$websiteDirectory/" -type d -exec chmod g+s {} \;
 cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirectory/htdocs/controlpanel/index.html"
