@@ -57,8 +57,8 @@ apt-get install -y git wget
 
 ## Stage 2: Conversion software
 
-# Define path containing all local software
-softwareRoot=/var/www/travelintimes
+# Define path containing all local software; can be specified as a script argument, or the default will be used
+softwareRoot=${1:-/var/www/travelintimes}
 
 # GDAL/ogr2ogr
 add-apt-repository -y ppa:ubuntugis/ppa
@@ -255,7 +255,7 @@ iptables -I INPUT 1 -p tcp --match multiport --dports 5000:5002 -j ACCEPT
 netfilter-persistent save
 netstat -ntlup
 
-# Create a symlink to the profile will be, and enable it to be writeable by the webserver
+# Create a symlink to where the profile will be, and enable it to be writeable by the webserver
 touch "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
 chown -R www-data.rollout "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
 chmod g+w "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
