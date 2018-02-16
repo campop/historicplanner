@@ -226,11 +226,14 @@ sudo -H -u www-data bash -c "make"
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-on-Ubuntu
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM
 osrmBackendDirectory=$softwareRoot/osrm-backend
-osrmVersion=5.4.0
+osrmVersion=5.15.2
 if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
-#	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl-doc libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.1 liblua5.1-0-dev libluabind-dev libtbb-dev
-	apt-get -y install build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libluabind-dev libtbb-dev
-	apt-get -y install doxygen
+	sudo apt-get install software-properties-common
+	sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+	sudo apt-get update
+	sudo apt-get install g++-6 gcc-6 build-essential git wget cmake3 pkg-config libbz2-dev libstxxl-dev libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
+	export CPP=cpp-6 CC=gcc-6 CXX=g++-6
+	export AR=gcc-ar-4.9 NM=gcc-nm-4.9 RANLIB=gcc-ranlib-4.9
 	cd $softwareRoot/
 	mkdir "$osrmBackendDirectory"
 	chown -R travelintimes.travelintimes "$osrmBackendDirectory"
