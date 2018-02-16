@@ -19,12 +19,12 @@ set -e
 lockdir=/var/lock/travelintimes
 mkdir -p $lockdir
 
-# Set a lock file; see: http://stackoverflow.com/questions/7057234/bash-flock-exit-if-cant-acquire-lock/7057385
+# Set a lock file; see: https://stackoverflow.com/questions/7057234/bash-flock-exit-if-cant-acquire-lock/7057385
 (
 	flock -n 9 || { echo '#	An installation is already running' ; exit 1; }
 
 
-# Get the script directory see: http://stackoverflow.com/a/246128/180733
+# Get the script directory see: https://stackoverflow.com/a/246128/180733
 # The multi-line method of geting the script directory is needed to enable the script to be called from elsewhere.
 SOURCE="${BASH_SOURCE[0]}"
 DIR="$( dirname "$SOURCE" )"
@@ -70,7 +70,7 @@ apt-get update
 apt-get install -y gdal-bin
 
 # ogr2osm, for conversion of shapefiles to .osm
-# See: http://wiki.openstreetmap.org/wiki/Ogr2osm
+# See: https://wiki.openstreetmap.org/wiki/Ogr2osm
 # See: https://github.com/pnorman/ogr2osm
 # Usage: python $softwareRoot/ogr2osm/ogr2osm.py my-shapefile.shp [-t my-translation-file.py]
 if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
@@ -80,12 +80,12 @@ if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
 fi
 
 # Omsosis, for pre-processing of .osm files
-# See: http://wiki.openstreetmap.org/wiki/Osmosis/Installation
+# See: https://wiki.openstreetmap.org/wiki/Osmosis/Installation
 # Note: apt-get -y install osmosis can't be used, as that gives too old a version that does not include TagTransform
 apt-get install -y default-jdk
 if [ ! -f $softwareRoot/osmosis/bin/osmosis ]; then
 	cd $softwareRoot/
-	wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz
+	wget https://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz
 	mkdir osmosis
 	mv osmosis-latest.tgz osmosis
 	cd osmosis
@@ -212,7 +212,7 @@ chmod g+w "${websiteDirectory}/htdocs/index."*
 #  chown -R www-data "${osrmFrontendDirectory}/bundle."* "${osrmFrontendDirectory}/css"
 #  # Install npm for building frontend
 #  apt-get install -y npm
-#  # Use of nodejs-legacy needed to avoid: 'npm WARN This failure might be due to the use of legacy binary "node"'; see: http://stackoverflow.com/a/21171188
+#  # Use of nodejs-legacy needed to avoid: 'npm WARN This failure might be due to the use of legacy binary "node"'; see: https://stackoverflow.com/a/21171188
 #  apt-get install -y nodejs-legacy
 #  cd "$osrmFrontendDirectory/"
 #  npm install
@@ -285,7 +285,7 @@ apt-get install -y python-certbot-apache
 if [ ! -f /etc/letsencrypt/live/www.travelintimes.org/fullchain.pem ]; then
 	email="campop@"
 	email+="geog.cam.ac.uk"
-	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w $softwareRoot/travelintimes/htdocs/ --email $email -d www.travelintimes.org -d  travelintimes.org
+	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w $softwareRoot/travelintimes/htdocs/ --email $email -d www.travelintimes.org -d travelintimes.org
 fi
 
 # Enable SSL in Apache
@@ -293,12 +293,14 @@ a2enmod ssl
 
 # Enable proxing, as osrm-routed can only serve HTTP, not HTTPS
 a2enmod proxy proxy_http
+
+# Restart Apache
 service apache2 restart
 
 
 ## Stage 7: Tile rendering
 
-# Install mapnik; see: http://wiki.openstreetmap.org/wiki/User:SomeoneElse/Ubuntu_1604_tileserver_load#Mapnik
+# Install mapnik; see: https://wiki.openstreetmap.org/wiki/User:SomeoneElse/Ubuntu_1604_tileserver_load#Mapnik
 apt-get install -y autoconf apache2-dev libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal1-dev libmapnik-dev mapnik-utils python-mapnik
 
 
