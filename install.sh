@@ -121,7 +121,7 @@ fi
 
 # Add user and group who will own the files
 adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
-addgroup rollout || echo "The rollout group already exists"
+addgroup travelintimes || echo "The rollout group already exists"
 
 
 
@@ -131,7 +131,7 @@ addgroup rollout || echo "The rollout group already exists"
 websiteDirectory=$softwareRoot/travelintimes
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
-	chown travelintimes.rollout "$websiteDirectory/"
+	chown travelintimes.travelintimes "$websiteDirectory/"
 	git clone https://github.com/campop/travelintimes.git "$websiteDirectory/"
 else
 	echo "Updating travelintimes repo ..."
@@ -182,11 +182,11 @@ lrmVersion=3.2.4
 if [ ! -d "$lrmFrontendDirectory/" ]; then
 	cd $softwareRoot/
 	mkdir "$lrmFrontendDirectory"
-	chown -R travelintimes.rollout "$lrmFrontendDirectory"
+	chown -R travelintimes.travelintimes "$lrmFrontendDirectory"
 	wget -P /tmp/ "https://github.com/perliedman/leaflet-routing-machine/archive/v${lrmVersion}.tar.gz"
 	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${lrmVersion}.tar.gz -C ${lrmFrontendDirectory}/ --strip-components=1"
 fi
-chown travelintimes.rollout "${websiteDirectory}/htdocs/index."*
+chown travelintimes.travelintimes "${websiteDirectory}/htdocs/index."*
 chmod g+w "${websiteDirectory}/htdocs/index."*
 
 # Add OSRM frontend (alternative GUI)
@@ -200,7 +200,7 @@ else
 	git pull
 	echo "... done"
 fi
-chown -R travelintimes.rollout "$osrmFrontendDirectory"
+chown -R travelintimes.travelintimes "$osrmFrontendDirectory"
 chmod -R g+w "$osrmFrontendDirectory/"
 find "$osrmFrontendDirectory/" -type d -exec chmod g+s {} \;
 
@@ -233,13 +233,13 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	apt-get -y install doxygen
 	cd $softwareRoot/
 	mkdir "$osrmBackendDirectory"
-	chown -R travelintimes.rollout "$osrmBackendDirectory"
+	chown -R travelintimes.travelintimes "$osrmBackendDirectory"
 	wget -P /tmp/ "https://github.com/Project-OSRM/osrm-backend/archive/v${osrmVersion}.tar.gz"
 	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${osrmVersion}.tar.gz -C ${osrmBackendDirectory}/ --strip-components=1"
 	rm "/tmp/v${osrmVersion}.tar.gz"
 	cd "$osrmBackendDirectory/"
 	mkdir -p build
-	chown -R travelintimes.rollout "${osrmBackendDirectory}/build/"
+	chown -R travelintimes.travelintimes "${osrmBackendDirectory}/build/"
 	cd build
 	sudo -H -u travelintimes bash -c "cmake .. -DCMAKE_BUILD_TYPE=Release"
 	sudo -H -u travelintimes bash -c "cmake --build ."
@@ -255,7 +255,7 @@ netstat -ntlup
 
 # Create a symlink to where the profile will be, and enable it to be writeable by the webserver
 touch "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
-chown -R www-data.rollout "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
+chown -R www-data.travelintimes "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
 chmod g+w "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
 if [ ! -L  "${osrmBackendDirectory}/build/profile.lua" ]; then
 	ln -s "${osrmBackendDirectory}/profiles/latest-build-profile.lua" "${osrmBackendDirectory}/build/profile.lua"
