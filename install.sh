@@ -60,6 +60,10 @@ apt-get install -y git wget
 # Define path containing all local software; can be specified as a script argument, or the default will be used
 softwareRoot=${1:-/var/www/travelintimes}
 
+# Add user and group who will own the files
+adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
+addgroup travelintimes || echo "The travelintimes group already exists"
+
 # GDAL/ogr2ogr
 add-apt-repository -y ppa:ubuntugis/ppa
 apt-get update
@@ -118,10 +122,6 @@ a2enmod headers
 if [ -f /etc/logrotate.d/apache2 ]; then
 	mv /etc/logrotate.d/apache2 /etc/logrotate.d-apache2.disabled
 fi
-
-# Add user and group who will own the files
-adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
-addgroup travelintimes || echo "The rollout group already exists"
 
 
 
