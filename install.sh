@@ -72,9 +72,7 @@ apt-get install -y gdal-bin
 if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
 	apt-get -y install python-gdal
 	cd $softwareRoot/
-	git clone git://github.com/pnorman/ogr2osm.git
-	cd ogr2osm
-	git submodule update --init
+	git clone --recursive https://github.com/pnorman/ogr2osm
 fi
 
 # Omsosis, for pre-processing of .osm files
