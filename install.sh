@@ -178,7 +178,7 @@ fi
 
 # Add leaflet-routing-machine
 lrmFrontendDirectory=$softwareRoot/leaflet-routing-machine
-lrmVersion=3.2.4
+lrmVersion=3.2.8
 if [ ! -d "$lrmFrontendDirectory/" ]; then
 	cd $softwareRoot/
 	mkdir "$lrmFrontendDirectory"
