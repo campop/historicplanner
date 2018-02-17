@@ -98,8 +98,11 @@ fi
 # # osmconvert, for merging .osm files
 # apt-get -y install osmctools
 
+# Install modern version of Node.js - Ubuntu 14.04 official version dates back to 2014
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+apt-get install -y nodejs
+
 # Conversion to GeoJSON
-apt-get install -y npm nodejs-legacy
 npm install -g osmtogeojson
 npm install -g ndjson-cli
 npm install -g geojson-mend
