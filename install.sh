@@ -176,7 +176,6 @@ chown www-data "${websiteDirectory}/enginedata/"
 if [ ! -L /etc/apache2/sites-enabled/travelintimes.conf ]; then
 	ln -s $SCRIPTDIRECTORY/apache.conf /etc/apache2/sites-enabled/travelintimes.conf
 	sed -i "s|/var/www/travelintimes|${softwareRoot}|g" /etc/apache2/sites-enabled/travelintimes.conf
-	service apache2 restart
 fi
 
 # Add leaflet-routing-machine
