@@ -231,9 +231,9 @@ osrmBackendDirectory=$softwareRoot/osrm-backend
 osrmVersion=5.15.2
 if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	apt-get install software-properties-common
-	add-apt-repository ppa:ubuntu-toolchain-r/test
+	add-apt-repository -y ppa:ubuntu-toolchain-r/test
 	apt-get update
-	apt-get install g++-6 gcc-6 build-essential git wget cmake3 pkg-config libbz2-dev libstxxl-dev libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
+	apt-get install -y g++-6 gcc-6 build-essential git wget cmake3 pkg-config libbz2-dev libstxxl-dev libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
 	export CPP=cpp-6 CC=gcc-6 CXX=g++-6
 	export AR=gcc-ar-4.9 NM=gcc-nm-4.9 RANLIB=gcc-ranlib-4.9
 	cd $softwareRoot/
