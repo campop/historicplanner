@@ -295,10 +295,11 @@ apt-get update
 apt-get install -y python-certbot-apache
 
 # Issue certificate
-if [ ! -f /etc/letsencrypt/live/www.travelintimes.org/fullchain.pem ]; then
+domainName=www.travelintimes.org
+if [ ! -f "/etc/letsencrypt/live/${domainName}/fullchain.pem" ]; then
 	email="campop@"
 	email+="geog.cam.ac.uk"
-	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w $softwareRoot/travelintimes/htdocs/ --email $email -d www.travelintimes.org -d travelintimes.org
+#	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w $softwareRoot/travelintimes/htdocs/ --email $email -d "${domainName}" -d travelintimes.org
 fi
 
 # Enable SSL in Apache
