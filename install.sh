@@ -284,10 +284,6 @@ if [ ! -L  "${osrmBackendDirectory}/build/profile.lua" ]; then
 	ln -s "${osrmBackendDirectory}/profiles/latest-build-profile.lua" "${osrmBackendDirectory}/build/profile.lua"
 fi
 
-# Enable Apache to log to a build file
-touch "${websiteDirectory}/build.log"
-chown www-data "${websiteDirectory}/build.log"
-
 # Enable Apache-commenced OSRM process to log to a folder
 chown www-data "${websiteDirectory}/logs-osrm/"
 
