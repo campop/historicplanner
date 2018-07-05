@@ -102,6 +102,9 @@ fi
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 apt-get install -y nodejs
 
+# Update npm
+npm i -g npm
+
 # Conversion to GeoJSON
 npm install -g osmtogeojson
 npm install -g ndjson-cli
