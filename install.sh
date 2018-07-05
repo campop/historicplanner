@@ -287,10 +287,10 @@ chown www-data "${websiteDirectory}/logs-osrm/"
 
 ## Stage 6: HTTPS support
 
+
 # Install certbot (Let's Encrypt); see: https://certbot.eff.org/all-instructions/#ubuntu-14-04-trusty-apache
-apt-get update
 apt-get install -y software-properties-common
-add-apt-repository ppa:certbot/certbot
+add-apt-repository -y ppa:certbot/certbot
 apt-get update
 apt-get install -y python-certbot-apache
 
