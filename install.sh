@@ -137,6 +137,7 @@ websiteDirectory=$softwareRoot/travelintimes
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
 	git clone https://github.com/campop/travelintimes.git "$websiteDirectory/"
+	cp -p "${websiteDirectory}/travelintimes/htdocs/.config.js.template" "${websiteDirectory}/travelintimes/htdocs/.config.js"
 else
 	echo "Updating travelintimes repo ..."
 	cd "$websiteDirectory/"
@@ -322,6 +323,9 @@ updatedb
 
 # Report completion
 echo "#	Installation completed"
+
+# Remind the user to update the website config file
+echo "Please edit the website config file at ${websiteDirectory}/travelintimes/htdocs/.config.js"
 
 # Remove the lock file - ${0##*/} extracts the script's basename
 ) 9>$lockdir/${0##*/}
