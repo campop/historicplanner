@@ -49,7 +49,6 @@ apt-get -y autoremove
 # General packages, useful while developing
 apt-get install -y unzip nano man-db bzip2 dnsutils
 apt-get install -y mlocate
-updatedb
 
 # General packages, required for deployment
 apt-get install -y git wget
