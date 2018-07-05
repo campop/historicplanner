@@ -256,10 +256,18 @@ fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
-# Permit engine(s) from port 5000
-iptables -I INPUT 1 -p tcp --match multiport --dports 5000:5002 -j ACCEPT
-netfilter-persistent save
-netstat -ntlup
+# Add firewall
+## Permit engine(s) from port 5000
+#iptables -I INPUT 1 -p tcp --match multiport --dports 5000:5002 -j ACCEPT
+#netfilter-persistent save
+#netstat -ntlup
+#Check status using: sudo ufw status verbose
+apt-get -y install ufw
+ufw allow from 127.0.0.1 to any port 5000
+ufw allow from 127.0.0.1 to any port 5001
+ufw allow from 127.0.0.1 to any port 5002
+ufw reload
+ufw status verbose
 
 # Create a symlink to where the profile will be, and enable it to be writeable by the webserver
 touch "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
