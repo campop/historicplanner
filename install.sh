@@ -78,6 +78,13 @@ if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
 	git clone --recursive https://github.com/pnorman/ogr2osm
 fi
 
+# Java 8, required by Osmosis
+add-apt-repository -y ppa:openjdk-r/ppa
+apt-get update
+apt-get install -y openjdk-8-jdk
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+java -version
+
 # Omsosis, for pre-processing of .osm files
 # See: https://wiki.openstreetmap.org/wiki/Osmosis/Installation
 # Note: apt-get -y install osmosis can't be used, as that gives too old a version that does not include TagTransform
