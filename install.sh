@@ -276,14 +276,6 @@ ufw allow from 127.0.0.1 to any port 5002
 ufw reload
 ufw status verbose
 
-# Create a symlink to where the profile will be, and enable it to be writeable by the webserver
-touch "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
-chown -R www-data.travelintimes "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
-chmod g+w "${osrmBackendDirectory}/profiles/latest-build-profile.lua"
-if [ ! -L  "${osrmBackendDirectory}/build/profile.lua" ]; then
-	ln -s "${osrmBackendDirectory}/profiles/latest-build-profile.lua" "${osrmBackendDirectory}/build/profile.lua"
-fi
-
 # Enable Apache-commenced OSRM process to log to a folder
 chown www-data "${websiteDirectory}/logs-osrm/"
 
