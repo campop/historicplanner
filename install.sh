@@ -251,6 +251,7 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${osrmVersion}.tar.gz -C ${osrmBackendDirectory}/ --strip-components=1"
 	rm "/tmp/v${osrmVersion}.tar.gz"
 	cd "$osrmBackendDirectory/"
+	chown www-data profiles/
 	mkdir -p build
 	chown -R travelintimes.travelintimes "${osrmBackendDirectory}/build/"
 	cd build
