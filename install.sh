@@ -241,14 +241,13 @@ chmod g+w "${websiteDirectory}/htdocs/index."*
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-on-Ubuntu
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM
 osrmBackendDirectory=$softwareRoot/osrm-backend
-osrmVersion=5.15.2
+osrmVersion=5.19.0
 if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	apt-get install software-properties-common
 	add-apt-repository -y ppa:ubuntu-toolchain-r/test
 	apt-get update
-	apt-get install -y g++-6 gcc-6 build-essential git wget cmake3 pkg-config libbz2-dev libstxxl-dev libstxxl1 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
+	apt-get install -y build-essential cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev libluabind-dev libluabind0.9.1v5
 	export CPP=cpp-6 CC=gcc-6 CXX=g++-6
-	export AR=gcc-ar-4.9 NM=gcc-nm-4.9 RANLIB=gcc-ranlib-4.9
 	cd $softwareRoot/
 	mkdir "$osrmBackendDirectory"
 	chown -R travelintimes.travelintimes "$osrmBackendDirectory"
@@ -313,7 +312,7 @@ service apache2 restart
 ## Stage 7: Tile rendering
 
 # Install mapnik; see: https://wiki.openstreetmap.org/wiki/User:SomeoneElse/Ubuntu_1604_tileserver_load#Mapnik
-apt-get install -y autoconf apache2-dev libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal1-dev libmapnik-dev mapnik-utils python-mapnik
+apt-get install -y autoconf libtool libxml2-dev libbz2-dev libgeos-dev libgeos++-dev libproj-dev gdal-bin libgdal1-dev libmapnik-dev mapnik-utils python-mapnik
 
 
 
