@@ -63,9 +63,7 @@ softwareRoot=${1:-/var/www/travelintimes}
 adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
 addgroup travelintimes || echo "The travelintimes group already exists"
 
-# GDAL/ogr2ogr
-add-apt-repository -y ppa:ubuntugis/ppa
-apt-get update
+# GDAL/ogr2ogr (2.x)
 apt-get install -y gdal-bin
 
 # ogr2osm, for conversion of shapefiles to .osm
@@ -79,8 +77,6 @@ if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
 fi
 
 # Java 8, required by Osmosis
-add-apt-repository -y ppa:openjdk-r/ppa
-apt-get update
 apt-get install -y openjdk-8-jdk
 update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 java -version
@@ -122,7 +118,7 @@ apt-get install -y jq
 
 ## Stage 3: Webserver software
 
-# Webserver
+# Webserver (Apache 2.4)
 apt-get install -y apache2
 a2enmod rewrite
 apt-get install -y php php-cli php-xml

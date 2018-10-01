@@ -1,10 +1,10 @@
 # Travel in times: historic journey planner
 
-Scripts for installing the system, written for Ubuntu Server 16.04 LTS.
+Scripts for installing the system, written for Ubuntu Server 18.04 LTS.
 
 ## Requirements
 
-Written for Ubuntu Server 16.04 LTS.
+Written for Ubuntu Server 18.04 LTS.
 
 
 ## Setup
