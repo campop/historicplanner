@@ -272,6 +272,7 @@ apt-get -y install ufw
 ufw allow from 127.0.0.1 to any port 5000
 ufw allow from 127.0.0.1 to any port 5001
 ufw allow from 127.0.0.1 to any port 5002
+ufw allow from 127.0.0.1 to any port 5003
 ufw reload
 ufw status verbose
 
