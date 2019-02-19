@@ -157,12 +157,10 @@ chown -R www-data "$websiteDirectory/htdocs/geojson/"
 
 # Ensure the configurations directories are writable by the webserver
 chown www-data "${websiteDirectory}/configuration"
-chown www-data "${websiteDirectory}/configuration/frontend"
 chown www-data "${websiteDirectory}/configuration/mapnikstylesheet"
 chown www-data "${websiteDirectory}/configuration/routingprofiles"
 chown www-data "${websiteDirectory}/configuration/turns"
 chown www-data "${websiteDirectory}/configuration/tagtransform"
-chown www-data "${websiteDirectory}/configuration/frontend/archive"
 chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/archive"
 chown www-data "${websiteDirectory}/configuration/routingprofiles/archive"
 chown www-data "${websiteDirectory}/configuration/turns/archive"
@@ -171,7 +169,6 @@ chown www-data "${websiteDirectory}/configuration/tagtransform/archive"
 # Ensure the configuration files are writable by the webserver
 chown www-data "${websiteDirectory}/configuration/tagtransform/tagtransform.xml"
 chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/mapnikstylesheet.xml"
-chown www-data "${websiteDirectory}/configuration/frontend/osrm-frontend.js"
 chown www-data "${websiteDirectory}/configuration/routingprofiles/profile-"*
 chown www-data "${websiteDirectory}/configuration/turns/turns-"*
 
