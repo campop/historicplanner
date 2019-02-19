@@ -184,19 +184,6 @@ if [ ! -f /etc/apache2/sites-enabled/travelintimes.conf ]; then
 	sed -i "s|/var/www/travelintimes|${softwareRoot}|g" /etc/apache2/sites-enabled/travelintimes.conf
 fi
 
-# Add leaflet-routing-machine
-lrmFrontendDirectory=$softwareRoot/leaflet-routing-machine
-lrmVersion=3.2.8
-if [ ! -d "$lrmFrontendDirectory/" ]; then
-	cd $softwareRoot/
-	mkdir "$lrmFrontendDirectory"
-	chown -R travelintimes.travelintimes "$lrmFrontendDirectory"
-	wget -P /tmp/ "https://github.com/perliedman/leaflet-routing-machine/archive/v${lrmVersion}.tar.gz"
-	sudo -H -u travelintimes bash -c "tar -xvzf /tmp/v${lrmVersion}.tar.gz -C ${lrmFrontendDirectory}/ --strip-components=1"
-fi
-chown travelintimes.travelintimes "${websiteDirectory}/htdocs/index."*
-chmod g+w "${websiteDirectory}/htdocs/index."*
-
 
 ## Stage 5: Routing engine
 
