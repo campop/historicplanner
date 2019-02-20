@@ -185,7 +185,7 @@ if [ ! -f /etc/apache2/sites-enabled/travelintimes.conf ]; then
 fi
 
 
-## Stage 5: Routing engine
+## Stage 5: Routing engine and isochrones
 
 # OSRM routing engine
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-OSRM
@@ -217,8 +217,17 @@ fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
+# Isochrones, using Galton: https://github.com/urbica/galton
+nvm install 8.0.0
+nvm use 8.0.0
+cd "$softwareRoot/"
+npm install galton@v5.17.2
+chown -R travelintimes.travelintimes node_modules/
+rm package-lock.json
+
 # Add firewall
-## Permit engine(s) from port 5000
+## Permit routing engines from port 5000
+## Permit isochrone engines from port 4000
 #iptables -I INPUT 1 -p tcp --match multiport --dports 5000:5002 -j ACCEPT
 #netfilter-persistent save
 #netstat -ntlup
@@ -228,6 +237,10 @@ ufw allow from 127.0.0.1 to any port 5000
 ufw allow from 127.0.0.1 to any port 5001
 ufw allow from 127.0.0.1 to any port 5002
 ufw allow from 127.0.0.1 to any port 5003
+ufw allow from 127.0.0.1 to any port 4000
+ufw allow from 127.0.0.1 to any port 4001
+ufw allow from 127.0.0.1 to any port 4002
+ufw allow from 127.0.0.1 to any port 4003
 ufw reload
 ufw status verbose
 
