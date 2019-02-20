@@ -192,7 +192,7 @@ fi
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-on-Ubuntu
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM
 osrmBackendDirectory=$softwareRoot/osrm-backend
-osrmVersion=5.19.0
+osrmVersion=5.17.2
 if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	apt-get install software-properties-common
 	add-apt-repository -y ppa:ubuntu-toolchain-r/test
