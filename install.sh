@@ -212,7 +212,7 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	cd build
 	sudo -H -u travelintimes bash -c "cmake .. -DCMAKE_BUILD_TYPE=Release"
 	sudo -H -u travelintimes bash -c "cmake --build ."
-	cmake --build . --target install
+	#cmake --build . --target install
 fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
