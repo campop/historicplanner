@@ -198,7 +198,7 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	mkdir -p build
 	chown -R travelintimes.travelintimes "${osrmBackendDirectory}/build/"
 	cd build
-	sudo -H -u travelintimes bash -c "cmake .. -DCMAKE_BUILD_TYPE=Release" -DCMAKE_CXX_FLAGS="-Wno-pessimizing-move -Wno-redundant-move"	# Flags added as per https://github.com/Project-OSRM/osrm-backend/issues/5797
+	sudo -H -u travelintimes bash -c 'cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-Wno-pessimizing-move -Wno-redundant-move"'	# Flags added as per https://github.com/Project-OSRM/osrm-backend/issues/5797
 	sudo -H -u travelintimes bash -c "cmake --build ."
 	#cmake --build . --target install
 fi
