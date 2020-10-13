@@ -63,6 +63,10 @@ softwareRoot=${1:-/var/www/travelintimes}
 adduser --gecos "" travelintimes || echo "The travelintimes user already exists"
 addgroup travelintimes || echo "The travelintimes group already exists"
 
+# Create the directory
+mkdir -p $softwareRoot
+chown travelintimes.travelintimes $softwareRoot
+
 # GDAL/ogr2ogr (2.x)
 apt-get install -y gdal-bin
 
