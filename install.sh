@@ -218,6 +218,7 @@ chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
 # Isochrones, using Galton: https://github.com/urbica/galton
+# Binds against OSRM 5.17.2; see: https://github.com/urbica/galton/issues/231
 nvm install 8.0.0
 nvm use 8.0.0
 cd "$softwareRoot/"
