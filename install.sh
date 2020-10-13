@@ -140,7 +140,7 @@ websiteDirectory=$softwareRoot/travelintimes
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
 	git clone https://github.com/campop/travelintimes.git "$websiteDirectory/"
-	cp -p "${websiteDirectory}/travelintimes/htdocs/.config.js.template" "${websiteDirectory}/travelintimes/htdocs/.config.js"
+	cp -p "${websiteDirectory}/htdocs/.config.js.template" "${websiteDirectory}/htdocs/.config.js"
 else
 	echo "Updating travelintimes repo ..."
 	cd "$websiteDirectory/"
