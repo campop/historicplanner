@@ -205,10 +205,17 @@ fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
+# nvm; install then load immediately; see: https://github.com/nvm-sh/nvm
+sudo apt-get install -y curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 # Isochrones, using Galton: https://github.com/urbica/galton
-# Binds against OSRM 5.17.2; see: https://github.com/urbica/galton/issues/231
-nvm install 8.0.0
-nvm use 8.0.0
+# Binds against OSRM 5.17.2; see: https://github.com/urbica/galton/issues/231#issuecomment-707938664
+# Note that 8.0.0 does not work - using "8" will give v8.17.0, which works
+nvm install 8
+nvm use 8
 cd "$softwareRoot/"
 npm install galton@v5.17.2
 chown -R travelintimes.travelintimes node_modules/
