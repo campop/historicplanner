@@ -39,12 +39,8 @@ sudo addgroup rollout
 # Add your username to the rollout group
 sudo adduser `whoami` rollout
 
-# Some command shells won't detect the preceding group change, so reset your shell eg. by logging out and then back in again:
-exit
-
-# Login
-# user@client:~$
-ssh user@machine
+# The adduser command above can't add your existing shell process to the new rollout group; you may want to replace it by doing:
+exec newgrp rollout
 
 # Set ownership and group
 # user@machine:~$
@@ -52,5 +48,5 @@ sudo chown -R travelintimes.rollout $softwareRoot/travelintimes-deploy
 
 # Set group permissions and add sticky group bit
 sudo chmod -R g+w $softwareRoot/travelintimes-deploy
-sudo find $softwareRoot/travelintimes -type d -exec chmod g+s {} \;
+sudo find $softwareRoot/travelintimes-deploy -type d -exec chmod g+s {} \;
 ```
