@@ -88,10 +88,11 @@ apt-get install -y osmosis
 # apt-get -y install osmctools
 
 # Install modern version of Node.js - Ubuntu 14.04 official version dates back to 2014
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+##curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 apt-get install -y nodejs
 
-# Update npm
+# npm; also run an update
+apt-get install -y npm
 npm i -g npm
 
 # Conversion to GeoJSON
