@@ -1,10 +1,10 @@
 # Travel in times: historic journey planner
 
-Scripts for installing the system, written for Ubuntu Server 18.04 LTS.
+Scripts for installing the system, written for Ubuntu Server 20.04 LTS.
 
 ## Requirements
 
-Written for Ubuntu Server 18.04 LTS.
+Written for Ubuntu Server 20.04 LTS.
 
 
 ## Setup
@@ -49,4 +49,10 @@ sudo chown -R travelintimes.rollout $softwareRoot/travelintimes-deploy
 # Set group permissions and add sticky group bit
 sudo chmod -R g+w $softwareRoot/travelintimes-deploy
 sudo find $softwareRoot/travelintimes-deploy -type d -exec chmod g+s {} \;
+```
+
+Then, run the script, stating as the argument where you want all the files installed, with the default as shown:
+
+```
+sudo ./install.sh /var/www/travelintimes
 ```
