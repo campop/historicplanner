@@ -197,7 +197,11 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	chown www-data profiles/
 	mkdir -p build
 	chown -R travelintimes.travelintimes "${osrmBackendDirectory}/build/"
+	# Patch; see: https://github.com/Project-OSRM/osrm-backend/issues/5797
+	wget -O fix-boost-fs.patch https://aur.archlinux.org/cgit/aur.git/plain/fix-boost-fs.patch?h=osrm-backend
+	git apply fix-boost-fs.patch
 	cd build
+	# Fix at: https://github.com/Project-OSRM/osrm-backend/issues/5797
 	sudo -H -u travelintimes bash -c 'cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-Wno-pessimizing-move -Wno-redundant-move"'	# Flags added as per https://github.com/Project-OSRM/osrm-backend/issues/5797
 	sudo -H -u travelintimes bash -c "cmake --build ."
 	#cmake --build . --target install
