@@ -1,5 +1,6 @@
 #!/bin/bash
 # Installation
+# Written for Ubuntu 20.04 LTS Server
 
 
 ## Stage 1: Boilerplate script setup
@@ -75,7 +76,6 @@ apt-get install -y gdal-bin
 # See: https://github.com/pnorman/ogr2osm
 # Usage: python $softwareRoot/ogr2osm/ogr2osm.py my-shapefile.shp [-t my-translation-file.py]
 if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
-	apt-get -y install python-gdal
 	cd $softwareRoot/
 	git clone --recursive https://github.com/pnorman/ogr2osm
 fi
