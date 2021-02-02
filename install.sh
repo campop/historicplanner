@@ -167,9 +167,10 @@ chown www-data "${websiteDirectory}/exports"
 chown www-data "${websiteDirectory}/enginedata/"
 
 # Link in Apache VirtualHost
-if [ ! -f /etc/apache2/sites-enabled/travelintimes.conf ]; then
-	cp -p $SCRIPTDIRECTORY/apache.conf /etc/apache2/sites-enabled/travelintimes.conf
-	sed -i "s|/var/www/travelintimes|${softwareRoot}|g" /etc/apache2/sites-enabled/travelintimes.conf
+if [ ! -f /etc/apache2/sites-available/travelintimes.conf ]; then
+	cp -p $SCRIPTDIRECTORY/apache.conf /etc/apache2/sites-available/travelintimes.conf
+	sed -i "s|/var/www/travelintimes|${softwareRoot}|g" /etc/apache2/sites-available/travelintimes.conf
+	a2ensite travelintimes
 fi
 
 
