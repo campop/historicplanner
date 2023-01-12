@@ -288,7 +288,7 @@ updatedb
 echo "#	Installation completed"
 
 # Remind the user to update the website config file
-echo "Please edit the website config file at ${websiteDirectory}/travelintimes/htdocs/.config.js"
+echo "Please edit the website config file at ${websiteDirectory}/htdocs/.config.js"
 
 # Give a link to the control panel
 echo "Please upload data and start the routing at https://${domainName}/controlpanel/"
