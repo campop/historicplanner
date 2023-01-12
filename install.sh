@@ -179,13 +179,9 @@ fi
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-on-Ubuntu
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM
 osrmBackendDirectory=$softwareRoot/osrm-backend
-osrmVersion=5.17.2
+osrmVersion=5.27.1
 if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
-	apt-get install software-properties-common
-	add-apt-repository -y ppa:ubuntu-toolchain-r/test
-	apt-get update
-	apt-get install -y build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
-	export CPP=cpp-6 CC=gcc-6 CXX=g++-6
+	# Get the release
 	cd $softwareRoot/
 	mkdir "$osrmBackendDirectory"
 	chown -R travelintimes.travelintimes "$osrmBackendDirectory"
@@ -196,14 +192,17 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	chown www-data profiles/
 	mkdir -p build
 	chown -R travelintimes.travelintimes "${osrmBackendDirectory}/build/"
-	# Patch; see: https://github.com/Project-OSRM/osrm-backend/issues/5797
-	wget -O fix-boost-fs.patch https://aur.archlinux.org/cgit/aur.git/plain/fix-boost-fs.patch?h=osrm-backend
-	git apply fix-boost-fs.patch
+	# Patch; see: https://github.com/Project-OSRM/osrm-backend/issues/6497
+	wget -O patch-6497-fix-tbbparallelpipeline.patch https://patch-diff.githubusercontent.com/raw/Project-OSRM/osrm-backend/pull/6493.patch
+	patch -p1 < patch-6497-fix-tbbparallelpipeline.patch
+	# Get build dependencies
+	apt-get install -y build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
+	apt-get install -y doxygen
+	# Build
+	export CPP=cpp-6 CC=gcc-6 CXX=g++-6
 	cd build
-	# Fix at: https://github.com/Project-OSRM/osrm-backend/issues/5797
-	sudo -H -u travelintimes bash -c 'cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-Wno-pessimizing-move -Wno-redundant-move"'	# Flags added as per https://github.com/Project-OSRM/osrm-backend/issues/5797
+	sudo -H -u travelintimes bash -c 'cmake .. -DCMAKE_BUILD_TYPE=Release'
 	sudo -H -u travelintimes bash -c "cmake --build ."
-	#cmake --build . --target install
 fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
