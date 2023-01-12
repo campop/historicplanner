@@ -73,12 +73,10 @@ apt-get install -y gdal-bin
 
 # ogr2osm, for conversion of shapefiles to .osm
 # See: https://wiki.openstreetmap.org/wiki/Ogr2osm
-# See: https://github.com/pnorman/ogr2osm
-# Usage: python $softwareRoot/ogr2osm/ogr2osm.py my-shapefile.shp [-t my-translation-file.py]
-if [ ! -f $softwareRoot/ogr2osm/ogr2osm.py ]; then
-	cd $softwareRoot/
-	git clone --recursive https://github.com/pnorman/ogr2osm
-fi
+# See: https://github.com/roelderickx/ogr2osm
+# Usage: ogr2osm my-shapefile.shp [-t my-translation-file.py]
+apt-get install -y python3 python3-pip
+pip install --upgrade ogr2osm
 
 # Omsosis, for pre-processing of .osm files
 # See: https://wiki.openstreetmap.org/wiki/Osmosis/Installation
