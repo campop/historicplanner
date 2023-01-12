@@ -219,7 +219,9 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 8
 nvm use 8
 cd "$softwareRoot/"
+set +e	# Remove stop-on-error
 npm install galton@v5.17.2
+set -e	# Restore stop-on-error
 chown -R travelintimes.travelintimes node_modules/
 rm package-lock.json
 
