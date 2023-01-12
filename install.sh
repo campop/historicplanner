@@ -259,7 +259,9 @@ domainName=www.travelintimes.org
 if [ ! -f "/etc/letsencrypt/live/${domainName}/fullchain.pem" ]; then
 	email="campop@"
 	email+="geog.cam.ac.uk"
-#	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w $softwareRoot/travelintimes/htdocs/ --email $email -d "${domainName}" -d travelintimes.org
+	set +e  # Remove stop-on-error
+	certbot --agree-tos --no-eff-email certonly --keep-until-expiring --webroot -w $softwareRoot/travelintimes/htdocs/ --email $email -d "${domainName}" -d travelintimes.org
+	set -e  # Restore stop-on-error
 fi
 
 # Enable SSL in Apache
