@@ -85,8 +85,8 @@ apt-get install -y osmosis
 # # osmconvert, for merging .osm files
 # apt-get -y install osmctools
 
-# Install modern version of Node.js - Ubuntu 14.04 official version dates back to 2014
-##curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+# Install modern version of Node.js (Ubuntu repo version is old)
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install -y nodejs
 
 # npm; also run an update
