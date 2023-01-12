@@ -226,23 +226,30 @@ chown -R travelintimes.travelintimes node_modules/
 rm package-lock.json
 
 # Add firewall
-## Permit routing engines from port 5000
-## Permit isochrone engines from port 4000
-#iptables -I INPUT 1 -p tcp --match multiport --dports 5000:5002 -j ACCEPT
-#netfilter-persistent save
-#netstat -ntlup
-#Check status using: sudo ufw status verbose
+# Check status using: sudo ufw status verbose
 apt-get -y install ufw
+ufw logging low
+ufw --force reset
+ufw --force enable
+ufw default deny
+ufw allow ssh
+ufw allow http
+ufw allow https
+# Permit routing engines from port 5000
 ufw allow from 127.0.0.1 to any port 5000
 ufw allow from 127.0.0.1 to any port 5001
 ufw allow from 127.0.0.1 to any port 5002
 ufw allow from 127.0.0.1 to any port 5003
+# Permit isochrone engines from port 4000
 ufw allow from 127.0.0.1 to any port 4000
 ufw allow from 127.0.0.1 to any port 4001
 ufw allow from 127.0.0.1 to any port 4002
 ufw allow from 127.0.0.1 to any port 4003
 ufw reload
 ufw status verbose
+# Set UFW logging to be done only into /var/log/ufw.log rather than into /var/log/syslog
+sed -i 's/#\& ~/\& stop/g' /etc/rsyslog.d/20-ufw.conf
+service rsyslog restart
 
 # Enable Apache-commenced OSRM process to log to a folder
 chown www-data "${websiteDirectory}/logs-osrm/"
