@@ -226,7 +226,7 @@ fi
 # Check status using: sudo ufw status verbose
 apt-get -y install ufw
 ufw logging low
-ufw --force reset
+#ufw --force reset
 ufw --force enable
 ufw default deny
 ufw allow ssh
