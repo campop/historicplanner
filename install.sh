@@ -312,6 +312,7 @@ echo "Please set your API keys by editing the website config file at ${websiteDi
 
 # Give a link to the control panel
 echo "Please upload data and start the routing at https://${domainName}/controlpanel/"
+echo "If you have existing data files, copy them to the exports folder at $softwareRoot/travelintimes/exports/"
 
 # Remove the lock file - ${0##*/} extracts the script's basename
 ) 9>$lockdir/${0##*/}
