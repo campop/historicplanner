@@ -278,10 +278,10 @@ service apache2 restart
 
 
 ## Stage 7: Tile rendering
-
+if [ 1 -eq 0 ]; then
 # Install mapnik; see: https://switch2osm.org/serving-tiles/manually-building-a-tile-server-20-04-lts/ and https://wiki.openstreetmap.org/wiki/User:SomeoneElse/Ubuntu_1604_tileserver_load#Mapnik
 apt-get install -y libboost-all-dev git tar unzip wget bzip2 build-essential autoconf libtool libxml2-dev libgeos-dev libgeos++-dev libpq-dev libbz2-dev libproj-dev munin-node munin protobuf-c-compiler libfreetype6-dev libtiff5-dev libicu-dev libgdal-dev libcairo2-dev libcairomm-1.0-dev apache2 apache2-dev libagg-dev liblua5.2-dev ttf-unifont lua5.1 liblua5.1-0-dev
-
+fi
 
 
 # Update file search index
