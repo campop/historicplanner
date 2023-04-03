@@ -136,7 +136,7 @@ find "$websiteDirectory/" -type d -exec chmod g+s {} \;
 cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirectory/htdocs/controlpanel/index.html"
 
 # Add routing UI library
-websiteDirectory=$softwareRoot/travelintimes-ui
+websiteDirectory=$softwareRoot/routing-ui
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
 	git clone https://github.com/cyclestreets/routing-ui "$websiteDirectory/"
