@@ -85,13 +85,9 @@ apt-get install -y osmosis
 # # osmconvert, for merging .osm files
 # apt-get -y install osmctools
 
-# Install modern version of Node.js (Ubuntu repo version is old)
+# Install modern version of Node.js (Ubuntu repo version is old), which includes npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install -y nodejs
-
-# npm; also run an update
-apt-get install -y npm
-npm i -g npm
 
 # Conversion to GeoJSON
 npm install -g osmtogeojson
