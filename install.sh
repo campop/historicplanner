@@ -122,7 +122,7 @@ websiteDirectory=$softwareRoot/travelintimes
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
 	git clone https://github.com/campop/travelintimes.git "$websiteDirectory/"
-	git config --global --add safe.directory "$websiteDirectory/travelintimes"
+	git config --global --add safe.directory "$websiteDirectory"
 	cp -p "${websiteDirectory}/htdocs/.config.js.template" "${websiteDirectory}/htdocs/.config.js"
 else
 	echo "Updating travelintimes repo ..."
