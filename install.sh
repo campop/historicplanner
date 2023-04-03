@@ -204,6 +204,9 @@ fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
+
+if [ 1 -eq 0 ]; then
+
 # nvm; install then load immediately; see: https://github.com/nvm-sh/nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
@@ -220,6 +223,9 @@ npm install galton@v5.17.2
 set -e	# Restore stop-on-error
 chown -R travelintimes.travelintimes node_modules/
 rm package-lock.json
+
+fi
+
 
 # Add firewall
 # Check status using: sudo ufw status verbose
