@@ -52,7 +52,7 @@ apt-get install -y unzip nano man-db bzip2 dnsutils
 apt-get install -y mlocate
 
 # General packages, required for deployment
-apt-get install -y git wget
+apt-get install -y git wget curl
 
 
 ## Stage 2: Conversion software
@@ -208,7 +208,6 @@ chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
 # nvm; install then load immediately; see: https://github.com/nvm-sh/nvm
-sudo apt-get install -y curl
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
