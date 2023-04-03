@@ -1,6 +1,6 @@
 #!/bin/bash
 # Installation
-# Written for Ubuntu 20.04 LTS Server
+# Written for Ubuntu 22.04 LTS Server
 
 
 ## Stage 1: Boilerplate script setup
@@ -189,14 +189,9 @@ if [ ! -f "${osrmBackendDirectory}/build/osrm-extract" ]; then
 	chown www-data profiles/
 	mkdir -p build
 	chown -R travelintimes.travelintimes "${osrmBackendDirectory}/build/"
-	# Patch; see: https://github.com/Project-OSRM/osrm-backend/issues/6497
-	wget -O patch-6497-fix-tbbparallelpipeline.patch https://patch-diff.githubusercontent.com/raw/Project-OSRM/osrm-backend/pull/6493.patch
-	patch -p1 < patch-6497-fix-tbbparallelpipeline.patch
 	# Get build dependencies
-	apt-get install -y build-essential git cmake pkg-config libbz2-dev libstxxl-dev libstxxl1v5 libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
-	apt-get install -y doxygen
+	apt-get install -y build-essential git cmake pkg-config doxygen libboost-all-dev libtbb-dev lua5.2 liblua5.2-dev libluabind-dev libstxxl-dev libstxxl1v5 libxml2 libxml2-dev libosmpbf-dev libbz2-dev libzip-dev libprotobuf-dev
 	# Build
-	export CPP=cpp-6 CC=gcc-6 CXX=g++-6
 	cd build
 	sudo -H -u travelintimes bash -c 'cmake .. -DCMAKE_BUILD_TYPE=Release'
 	sudo -H -u travelintimes bash -c "cmake --build ."
