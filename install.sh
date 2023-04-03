@@ -68,7 +68,7 @@ addgroup travelintimes || echo "The travelintimes group already exists"
 mkdir -p $softwareRoot
 chown travelintimes.travelintimes $softwareRoot
 
-# GDAL/ogr2ogr (>=2)
+# GDAL/ogr2ogr
 apt-get install -y gdal-bin
 
 # ogr2osm, for conversion of shapefiles to .osm
