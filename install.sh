@@ -135,6 +135,22 @@ chmod -R g+w "$websiteDirectory/"
 find "$websiteDirectory/" -type d -exec chmod g+s {} \;
 cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirectory/htdocs/controlpanel/index.html"
 
+# Add routing UI library
+websiteDirectory=$softwareRoot/travelintimes-ui
+if [ ! -d "$websiteDirectory/" ]; then
+	mkdir "$websiteDirectory/"
+	git clone https://github.com/cyclestreets/routing-ui "$websiteDirectory/"
+	git config --global --add safe.directory "$websiteDirectory"
+else
+	echo "Updating routing-ui repo ..."
+	cd "$websiteDirectory/"
+	git pull
+	echo "... done"
+fi
+chown -R travelintimes.travelintimes "$websiteDirectory/"
+chmod -R g+w "$websiteDirectory/"
+find "$websiteDirectory/" -type d -exec chmod g+s {} \;
+
 # Ensure the GeoJSON directory is writable
 chown -R www-data "$websiteDirectory/htdocs/geojson/"
 
