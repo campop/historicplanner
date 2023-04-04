@@ -139,7 +139,7 @@ cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirec
 websiteDirectory=$softwareRoot/routing-ui
 if [ ! -d "$websiteDirectory/" ]; then
 	mkdir "$websiteDirectory/"
-	git clone https://github.com/cyclestreets/routing-ui "$websiteDirectory/"
+	git clone https://github.com/campop/routing-ui "$websiteDirectory/"
 	git config --global --add safe.directory "$websiteDirectory"
 else
 	echo "Updating routing-ui repo ..."
