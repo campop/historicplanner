@@ -89,6 +89,12 @@ apt-get install -y osmosis
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install -y nodejs
 
+# Yarn, for JS package management; see: https://www.howtoforge.com/how-to-install-yarn-npm-package-manager-on-ubuntu-20-04/
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+apt-get update
+apt-get -y install yarn
+
 # Conversion to GeoJSON
 npm install -g osmtogeojson
 npm install -g ndjson-cli
@@ -147,6 +153,9 @@ else
 	git pull
 	echo "... done"
 fi
+cd "$websiteDirectory/routing-ui/"
+yarn install
+cd -
 chown -R travelintimes.travelintimes "$websiteDirectory/"
 chmod -R g+w "$websiteDirectory/"
 find "$websiteDirectory/" -type d -exec chmod g+s {} \;
