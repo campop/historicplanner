@@ -110,6 +110,7 @@ apt-get install -y php php-cli php-xml
 apt-get install -y libapache2-mod-php
 a2enmod macro
 a2enmod headers
+a2enmod proxy proxy_http
 
 # Disable Apache logrotate, as this loses log entries for stats purposes
 if [ -f /etc/logrotate.d/apache2 ]; then
@@ -272,9 +273,6 @@ fi
 
 # Enable SSL in Apache
 a2enmod ssl
-
-# Enable proxing, as osrm-routed can only serve HTTP, not HTTPS
-a2enmod proxy proxy_http
 
 # Restart Apache
 service apache2 restart
