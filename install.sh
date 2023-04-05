@@ -82,9 +82,6 @@ pip install --upgrade ogr2osm
 # See: https://wiki.openstreetmap.org/wiki/Osmosis/Installation
 apt-get install -y osmosis
 
-# # osmconvert, for merging .osm files
-# apt-get -y install osmctools
-
 # Install modern version of Node.js (Ubuntu repo version is old), which includes npm
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install -y nodejs
