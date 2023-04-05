@@ -127,13 +127,9 @@ if [ ! -d "$websiteDirectory/" ]; then
 	git clone https://github.com/campop/travelintimes.git "$websiteDirectory/"
 	git config --global --add safe.directory "$websiteDirectory"
 	cp -p "${websiteDirectory}/htdocs/.config.js.template" "${websiteDirectory}/htdocs/.config.js"
-else
-	echo "Updating travelintimes repo ..."
-	cd "$websiteDirectory/"
-	git pull
-	echo "... done"
 fi
 cd "$websiteDirectory/"
+git pull
 yarn install
 cd -
 chown -R travelintimes.travelintimes "$websiteDirectory/"
