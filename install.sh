@@ -136,24 +136,7 @@ else
 	git pull
 	echo "... done"
 fi
-chown -R travelintimes.travelintimes "$websiteDirectory/"
-chmod -R g+w "$websiteDirectory/"
-find "$websiteDirectory/" -type d -exec chmod g+s {} \;
-cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirectory/htdocs/controlpanel/index.html"
-
-# Add routing UI library
-websiteDirectory=$softwareRoot/routing-ui
-if [ ! -d "$websiteDirectory/" ]; then
-	mkdir "$websiteDirectory/"
-	git clone https://github.com/campop/routing-ui "$websiteDirectory/"
-	git config --global --add safe.directory "$websiteDirectory"
-else
-	echo "Updating routing-ui repo ..."
-	cd "$websiteDirectory/"
-	git pull
-	echo "... done"
-fi
-cd "$websiteDirectory/routing-ui/"
+cd "$websiteDirectory/"
 yarn install
 cd -
 chown -R travelintimes.travelintimes "$websiteDirectory/"
