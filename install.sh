@@ -142,21 +142,7 @@ cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirec
 chown -R www-data "$websiteDirectory/htdocs/geojson/"
 
 # Ensure the configurations directories are writable by the webserver
-chown www-data "${websiteDirectory}/configuration"
-chown www-data "${websiteDirectory}/configuration/mapnikstylesheet"
-chown www-data "${websiteDirectory}/configuration/routingprofiles"
-chown www-data "${websiteDirectory}/configuration/turns"
-chown www-data "${websiteDirectory}/configuration/tagtransform"
-chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/archive"
-chown www-data "${websiteDirectory}/configuration/routingprofiles/archive"
-chown www-data "${websiteDirectory}/configuration/turns/archive"
-chown www-data "${websiteDirectory}/configuration/tagtransform/archive"
-
-# Ensure the configuration files are writable by the webserver
-chown www-data "${websiteDirectory}/configuration/tagtransform/tagtransform.xml"
-chown www-data "${websiteDirectory}/configuration/mapnikstylesheet/mapnikstylesheet.xml"
-chown www-data "${websiteDirectory}/configuration/routingprofiles/profile-"*
-chown www-data "${websiteDirectory}/configuration/turns/turns-"*
+chown -R www-data "${websiteDirectory}/configuration"
 
 # Ensure the upload export files are writable by the webserver
 chown www-data "${websiteDirectory}/exports"
@@ -297,6 +283,8 @@ echo "Please set your API keys by editing the website config file at ${websiteDi
 # Give a link to the control panel
 echo "Please upload data and start the routing at https://${domainName}/controlpanel/"
 echo "If you have existing data files, copy them to the exports folder at $softwareRoot/travelintimes/exports/"
+
+
 
 # Remove the lock file - ${0##*/} extracts the script's basename
 ) 9>$lockdir/${0##*/}
