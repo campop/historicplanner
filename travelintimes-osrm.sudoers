@@ -1,0 +1,3 @@
+www-data ALL=(root) NOPASSWD: /bin/systemctl start travelintimes-osrm@500[0-9]
+www-data ALL=(root) NOPASSWD: /bin/systemctl stop travelintimes-osrm@500[0-9]
+www-data ALL=(root) NOPASSWD: /bin/systemctl restart travelintimes-osrm@500[0-9]

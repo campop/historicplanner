@@ -1,0 +1,14 @@
+[Unit]
+Description=OSRM
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+ExecStart=/var/www/travelintimes/osrm-backend/build/osrm-routed -p %I /var/www/travelintimes/travelintimes/enginedata/port%I/merged.osrm
+StandardOutput=append:/var/log/travelintimes-osrm-port%I.log
+StandardError=append:/var/log/travelintimes-osrm-error-port%I.log
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

@@ -188,6 +188,18 @@ fi
 chmod -R g+w "$osrmBackendDirectory/"
 find "$osrmBackendDirectory/" -type d -exec chmod g+s {} \;
 
+# Create and start an OSRM service; see: https://www.linuxbabe.com/ubuntu/install-osrm-ubuntu-22-04-open-source-routing-machine and https://unix.stackexchange.com/a/288310
+cp -pr $SCRIPTDIRECTORY/travelintimes-osrm@.service /etc/systemd/system/
+sed -i "s|/var/www/travelintimes|${softwareRoot}|g" /etc/systemd/system/travelintimes-osrm@.service
+chown root.root /etc/systemd/system/travelintimes-osrm@.service
+systemctl daemon-reload
+systemctl enable travelintimes-osrm@{5000..5003}
+systemctl start travelintimes-osrm@{5000..5003}
+
+# Allow Apache to start/stop/restart OSRM service; see: https://unix.stackexchange.com/a/523235
+cp -pr $SCRIPTDIRECTORY/travelintimes-osrm.sudoers /etc/sudoers.d/travelintimes-osrm
+chown root.root /etc/sudoers.d/travelintimes-osrm
+
 
 if [ 1 -eq 0 ]; then
 
