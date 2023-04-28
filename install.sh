@@ -131,6 +131,7 @@ if [ ! -d "$websiteDirectory/" ]; then
 fi
 cd "$websiteDirectory/"
 git pull
+npm install -g @mapbox/node-pre-gyp
 yarn install
 cd -
 chown -R travelintimes.travelintimes "$websiteDirectory/"
