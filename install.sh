@@ -131,7 +131,7 @@ if [ ! -d "$websiteDirectory/" ]; then
 fi
 cd "$websiteDirectory/"
 git pull
-npm install -g @mapbox/node-pre-gyp
+npm install -g @mapbox/node-pre-gyp			# Needed for isochrone generation packages
 yarn install
 cd -
 chown -R travelintimes.travelintimes "$websiteDirectory/"
@@ -159,7 +159,7 @@ if [ ! -f /etc/apache2/sites-available/travelintimes.conf ]; then
 fi
 
 
-## Stage 5: Routing engine and isochrones
+## Stage 5: Routing engine
 
 # OSRM routing engine
 # See: https://github.com/Project-OSRM/osrm-backend/wiki/Building-OSRM
@@ -201,29 +201,6 @@ systemctl start travelintimes-osrm@{5000..5003}
 cp -pr $SCRIPTDIRECTORY/travelintimes-osrm.sudoers /etc/sudoers.d/travelintimes-osrm
 chown root.root /etc/sudoers.d/travelintimes-osrm
 
-
-if [ 1 -eq 0 ]; then
-
-# nvm; install then load immediately; see: https://github.com/nvm-sh/nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-# Isochrones, using Galton: https://github.com/urbica/galton
-# Binds against OSRM 5.17.2; see: https://github.com/urbica/galton/issues/231#issuecomment-707938664
-# Note that 8.0.0 does not work - using "8" will give v8.17.0, which works
-nvm install 8
-nvm use 8
-cd "$softwareRoot/"
-set +e	# Remove stop-on-error
-npm install galton@v5.17.2
-set -e	# Restore stop-on-error
-chown -R travelintimes.travelintimes node_modules/
-rm package-lock.json
-
-fi
-
-
 # Add firewall
 # Check status using: sudo ufw status verbose
 apt-get -y install ufw
@@ -239,11 +216,6 @@ ufw allow from 127.0.0.1 to any port 5000
 ufw allow from 127.0.0.1 to any port 5001
 ufw allow from 127.0.0.1 to any port 5002
 ufw allow from 127.0.0.1 to any port 5003
-# Permit isochrone engines from port 4000
-ufw allow from 127.0.0.1 to any port 4000
-ufw allow from 127.0.0.1 to any port 4001
-ufw allow from 127.0.0.1 to any port 4002
-ufw allow from 127.0.0.1 to any port 4003
 ufw reload
 ufw status verbose
 # Set UFW logging to be done only into /var/log/ufw.log rather than into /var/log/syslog
