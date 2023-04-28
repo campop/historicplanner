@@ -201,12 +201,6 @@ systemctl start travelintimes-osrm@{5000..5003}
 cp -pr $SCRIPTDIRECTORY/travelintimes-osrm.sudoers /etc/sudoers.d/travelintimes-osrm
 chown root.root /etc/sudoers.d/travelintimes-osrm
 
-# R osrm package, which includes isochrone support
-apt-get install -y r-base-core
-apt-get install -y libudunits2-dev libcurl4-openssl-dev libgdal-dev
-R -e 'if (!require("osrm")) install.packages("osrm");'
-R -e 'if (!require("geojsonsf")) install.packages("geojsonsf");'
-
 
 if [ 1 -eq 0 ]; then
 
