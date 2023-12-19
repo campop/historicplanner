@@ -83,6 +83,8 @@ pip install --upgrade ogr2osm
 apt-get install -y osmosis
 
 # Install modern version of Node.js (Ubuntu repo version is old), which includes npm
+# NB Node 20 does not currently work, as the OSRM npm install stage gives a 404 for https://github.com/Project-OSRM/osrm-backend/releases/download/v5.27.1/node_osrm-v5.27.1-node-v115-linux-x64-Release.tar.gz
+# NODE_MODULE_VERSION is documented at: https://web.archive.org/web/20231130171145/https://nodejs.org/en/about/previous-releases
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt-get install -y nodejs
 
