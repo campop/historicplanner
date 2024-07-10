@@ -151,6 +151,9 @@ cp -p "$websiteDirectory/htdocs/controlpanel/index.html.template" "$websiteDirec
 # Ensure the GeoJSON directory is writable
 chown -R www-data "$websiteDirectory/htdocs/geojson/"
 
+# Ensure the networks MVT directory is writable
+chown -R www-data "$websiteDirectory/htdocs/networks/"
+
 # Ensure the configurations directories are writable by the webserver
 chown -R www-data "${websiteDirectory}/configuration"
 
