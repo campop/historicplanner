@@ -101,6 +101,14 @@ echo "deb [signed-by=/usr/share/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian
 apt-get update
 apt-get install -y yarn
 
+# Conversion to MVT, using Tippecanoe
+cd /tmp/
+git clone https://github.com/mapbox/tippecanoe.git
+cd tippecanoe
+make -j
+make install
+cd -
+
 # Conversion to GeoJSON
 npm install -g osmtogeojson
 npm install -g ndjson-cli
