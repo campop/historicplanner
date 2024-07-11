@@ -102,19 +102,13 @@ apt-get update
 apt-get install -y yarn
 
 # Conversion to MVT, using Tippecanoe
+npm install -g osmtogeojson
 cd /tmp/
 git clone https://github.com/mapbox/tippecanoe.git
 cd tippecanoe
 make -j
 make install
 cd -
-
-# Conversion to GeoJSON
-npm install -g osmtogeojson
-npm install -g ndjson-cli
-npm install -g geojson-mend
-npm install -g geojson-precision
-apt-get install -y jq
 
 
 
