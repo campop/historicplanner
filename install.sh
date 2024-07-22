@@ -156,6 +156,9 @@ chown -R www-data "$websiteDirectory/htdocs/geojson/"
 # Ensure the networks MVT directory is writable
 chown -R www-data "$websiteDirectory/htdocs/networks/"
 
+# Ensure the tile cache directory is writable
+chown -R www-data "$websiteDirectory/htdocs/tiles/"
+
 # Ensure the configurations directories are writable by the webserver
 chown -R www-data "${websiteDirectory}/configuration"
 
